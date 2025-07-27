@@ -5,325 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Свой дом НН | Современные каркасные дома в Нижнем Новгороде</title>
   <meta name="description" content="Проектируем и строим стильные каркасные дома с высокими сводчатыми потолками. Проекты «Семейный 40», «МиниДом 36» и «Дом Куб 30». Узнайте стоимость!">
+  <!-- Стили -->
+  <link rel="stylesheet" href="style.css">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-  <!-- AOS Animation CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
-
-  <style>
-    :root {
-      --accent: #FF6F61;
-      --bg-main: #1a252f;
-      --bg-card: rgba(44,62,80,0.7);
-      --text-main: #f5f6fa;
-      --fab-bg: #161c25;
-      --fab-outline: #FF6F61;
-    }
-   <link rel="stylesheet" href="style.css"> body {
-      margin: 0;
-      font-family: 'Roboto', Arial, sans-serif;
-      background: var(--bg-main);
-      color: var(--text-main);
-      min-height: 100vh;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-      padding: 28px 0 14px 0;
-      background: rgba(26,37,47,0.84);
-      position: relative;
-      z-index: 10;
-    }
-    nav a {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 1.05rem;
-      letter-spacing: 0.02em;
-      transition: color 0.16s;
-    }
-    nav a:hover { color: var(--accent); }
-
-    /* Hero Video Block */
-    .hero-video-wrap {
-      position: relative;
-      min-height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-bg-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: 0;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(26,37,47,0.4);
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: 100vw;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 70vh;
-    }
-    .hero-content h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 0 0 18px 0;
-      letter-spacing: 0.01em;
-    }
-    .hero-content p {
-      font-size: 1.25rem;
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.45;
-      color: #dae1e8;
-    }
-    /* Philosophy Block */
-    .philosophy-section {
-      padding: 40px 20px 24px 20px;
-      text-align: center;
-    }
-    .philosophy-section h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-    }
-    .philosophy-section p {
-      font-size: 1.15rem;
-      line-height: 1.6;
-      color: #c6d3eb;
-      max-width: 620px;
-      margin: 0 auto;
-    }
-    /* Projects Cards */
-    .projects-section {
-      padding: 32px 12px 12px 12px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .projects-section h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.65rem;
-      margin-bottom: 26px;
-      text-align: center;
-    }
-    .projects-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-    }
-    .card {
-      background: var(--bg-card);
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.11);
-      max-width: 350px;
-      min-width: 260px;
-      width: 100%;
-display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      transition: transform 0.19s;
-    }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-    .card-content {
-      padding: 18px 16px 22px 16px;
-      flex: 1 1 auto;
-    }
-    .card-content h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3rem;
-      margin: 0 0 12px 0;
-      color: var(--accent);
-    }
-    .card-content p {
-      font-size: 1rem;
-      color: #e0e5ef;
-      margin-bottom: 16px;
-      min-height: 48px;
-    }
-    .card-content a {
-      display: inline-block;
-      padding: 10px 22px;
-      font-family: 'Montserrat', sans-serif;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 7px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 0 10px #FF6F61ee;
-      transition: background 0.16s;
-    }
-    .card-content a:hover { background: #ff877a; }
-
-    /* Individual Project Block */
-    .custom-section {
-      background: rgba(44,62,80,0.6);
-      border-radius: 16px;
-      margin: 40px 10px 36px 10px;
-      padding: 32px 18px 18px 18px;
-      text-align: center;
-      max-width: 850px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .custom-section h2 {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--accent);
-      font-size: 1.6rem;
-      margin-bottom: 7px;
-    }
-    .custom-section h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      color: #faefe6;
-      margin: 0 0 14px 0;
-      font-size: 1.16rem;
-    }
-    .custom-section p {
-      font-size: 1.02rem;
-      color: #e3e6ec;
-      margin: 0;
-      line-height: 1.6;
-      max-width: 550px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Feedback form */
-    .feedback-section {
-      padding: 36px 0 60px 0;
-      text-align: center;
-      background: none;
-    }
-    .feedback-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 340px;
-      background: rgba(44,62,80,0.65);
-      border-radius: 12px;
-      padding: 22px 18px;
-      font-family: 'Roboto', sans-serif;
-      margin: 0 auto;
-    }
-    .feedback-form label {
-      display: flex;
-      flex-direction: column;
-      font-size: 1rem;
-      color: #f5f6fa;
-      margin-bottom: 4px;
-    }
-    .feedback-form input {
-      margin-top: 5px;
-      padding: 8px 10px;
-      border: 1px solid #2c3e50;
-      border-radius: 7px;
-      font-size: 1rem;
-      background: #1a252f;
-      color: #fff;
-    }
-    .feedback-btn {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 12px 0;
-      border-radius: 8px;
-      font-weight: bold;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.08rem;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      box-shadow: 0 0 12px #FF6F61;
-      transition: background 0.2s;
-    }
-    .feedback-btn:hover { background: #ff877a; }
-    /* Floating Sergey Button */
-    .sergey-fab-rect {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      background: var(--fab-bg);
-      color: #f5f6fa;
-      border: 2px solid var(--fab-outline);
-      box-shadow: 0 0 16px var(--fab-outline), 0 0 32px rgba(255,111,97,0.3);
-      border-radius: 12px;
-      font-family: 'Montserrat', 'Roboto', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: box-shadow 0.2s;
-      cursor: pointer;
-      outline: none;
-      animation: neonPulse 2.4s infinite alternate ease-in-out;
-    }
-    @keyframes neonPulse {
-      0% {
-        box-shadow: 0 0 8px var(--fab-outline), 0 0 24px var(--fab-outline);
-}
-      100% {
-        box-shadow: 0 0 24px var(--fab-outline), 0 0 64px var(--fab-outline);
-      }
-    }
-    .sergey-fab-rect .icon {
-      font-size: 1.4em;
-      margin-right: 7px;
-    }
-    @media (max-width: 900px) {
-      .projects-cards { flex-direction: column; gap: 18px; }
-    }
-    @media (max-width: 600px) {
-      .sergey-fab-rect {
-        padding: 10px 14px;
-        font-size: 0.95rem;
-        bottom: 14px;
-        right: 14px;
-      }
-      .hero-content h1 { font-size: 1.4rem; }
-      .hero-content p { font-size: 1rem; }
-      .projects-section h2, .philosophy-section h2 { font-size: 1.22rem; }
-      .custom-section { padding: 18px 9px; }
-    }
-  </style>
-
-  <!-- Google Analytics (замени G-XXXXXXXXXX на свой ID) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
 </head>
 <body>
   <!-- Навигация -->
@@ -335,20 +21,19 @@ display: flex;
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <!-- Hero-видеофон с overlay -->
+  <!-- Hero-видеофон c overlay -->
   <section class="hero-video-wrap">
     <video autoplay loop muted playsinline poster="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png" class="hero-bg-video">
       <source src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1" type="video/mp4" />
     </video>
     <div class="hero-overlay"></div>
-    <div class="hero-content" data-aos="fade-up">
+    <div class="hero-content">
       <h1>Пространство. Свет. Ваш Дом.</h1>
       <p>Проектируем и строим современные каркасные дома с высокими, сводчатыми потолками.</p>
     </div>
   </section>
 
-  <!-- Философия -->
-  <section class="philosophy-section" data-aos="fade-up" data-aos-delay="90">
+  <section class="philosophy-section">
     <h2>Эконом — не значит компромисс в эстетике</h2>
     <p>
       Мы уверены: дом может быть стильным, просторным и экономным одновременно. Наша уникальная черта — дома без прямых потолков,
@@ -356,8 +41,7 @@ display: flex;
     </p>
   </section>
 
-  <!-- Наши проекты -->
-  <section class="projects-section" data-aos="fade-up" data-aos-delay="140">
+  <section class="projects-section">
     <h2>Наши проекты</h2>
     <div class="projects-cards">
       <div class="card">
@@ -387,9 +71,8 @@ display: flex;
     </div>
   </section>
 
-  <!-- Индивидуальное проектирование -->
-  <section class="custom-section" data-aos="fade-up" data-aos-delay="180">
-<h2>Дом по вашим правилам</h2>
+  <section class="custom-section">
+    <h2>Дом по вашим правилам</h2>
     <h3>От планировки до последней занавески</h3>
     <p>
       Не ограничиваемся типовыми проектами — организуем индивидуальный дизайн интерьера, поможем с расстановкой мебели,
@@ -397,11 +80,10 @@ display: flex;
     </p>
   </section>
 
-  <!-- Форма обратной связи -->
-  <section class="feedback-section" data-aos="fade-up" data-aos-delay="250">
+  <section class="feedback-section">
     <h2>Оставить заявку</h2>
     <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
-      <label>
+<label>
         Имя:
         <input type="text" name="name" required placeholder="Ваше имя" />
       </label>
@@ -413,39 +95,24 @@ display: flex;
     </form>
   </section>
 
-  <!-- Кнопка ассистента Прораб Сергей -->
+  <!-- Кнопка ассистента -->
   <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом">
     <span class="icon">👷</span>
     <span class="label">Сергей Прораб</span>
   </button>
 
-  <!-- AOS Animation Script -->
+  <!-- Скрипты (AOS, Chatbase, app.js) -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ once: true, duration: 700, offset: 60 });
+    if (window.AOS && typeof AOS.init === "function") {
+      AOS.init({ once: true, duration: 700, offset: 60 });
+    }
   </script>
-
-  <!-- Chatbase Ассистент Прораб Сергей -->
   <script>
     window.chatbase = window.chatbase || {};
     window.chatbase.config = { chatbotId: "elEbjas8v3UayyJoEx6Fq" };
   </script>
   <script src="https://www.chatbase.co/embed.min.js" id="chatbase-script" defer></script>
-
-  <!-- Яндекс.Метрика (замени 12345678 на свой ID) -->
-  <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-      m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
-      m[i].l=1*new Date();
-      k=e.createElement(t), a=e.getElementsByTagName(t)[0], k.async=1, k.src=r, a.parentNode.insertBefore(k,a)
-    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    ym(12345678, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-    });
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <script src="app.js"></script>
 </body>
 </html>
