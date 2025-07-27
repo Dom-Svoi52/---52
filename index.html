@@ -3,81 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Свой дом НН | Современные каркасные дома в Нижнем Новгороде</title>
-  <meta name="description" content="Свой дом НН — стильные и энергоэффективные каркасные дома в Нижнем Новгороде. Перекрёстное утепление, калькулятор, экспертная консультация, заявку отправить просто!">
-  <!-- Стили -->
+  <title>Свой дом НН | Современные каркасные дома</title>
+  <meta name="description" content="Свой дом НН — стильные энергоэффективные каркасные дома. Калькулятор стоимости, галерея проектов, экспертная консультация.">
   <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
 </head>
 <body>
-  <!-- Меню (только Главная и Технологии) -->
+  <!-- Меню -->
   <nav>
     <a href="index.html" class="active">Главная</a>
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <!-- Hero-видео-фон с акцентом на бренд и регион -->
-  <section class="hero-video-wrap">
+  <!-- Hero-видео (минимум текста, максимум видео) -->
+  <section class="hero-video-wrap" style="min-height:70vh;">
     <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" id="bgvideo"
       src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1">
     </video>
-    <div class="hero-content">
-      <h1>
-        Свой дом НН <span style="display:inline-block;font-size:1.25rem;font-weight:700;color:#FF6F61;vertical-align:middle;">(Нижний Новгород)</span>
-        <span style="display:block;font-size:1.08rem;margin:2px 0 0 0;color:#8CFCCC;">Перекрёстное утепление — максимум тепла!</span>
-      </h1>
-      <p>
-        Современные, тёплые, стильные каркасные дома по фирменной технологии.<br>
-        Высокие сводчатые потолки, экологичные материалы, энергоэффективность, экспертная консультация.
+    <div class="hero-content" style="background:rgba(26,37,47,0.19);padding:35px 6px 48px 6px;">
+      <h1 style="font-size:2.1rem;letter-spacing:0.01em;">Свой дом <span style="color:#FF6F61;">НН</span></h1>
+      <p style="font-size:1.11rem;max-width:370px;margin:14px auto 0 auto;">
+        Современные тёплые каркасные <br>дома с перекрёстным утеплением и индивидуальным подходом
       </p>
     </div>
   </section>
 
-  <!-- Калькулятор стоимости -->
-  <section class="calc-section">
-    <h2>Калькулятор стоимости дома с перекрёстным утеплением</h2>
-    <form id="calc-form" class="calc-form">
-      <label>
-        Площадь дома (м²):
+  <!-- Блок проектов (карточки домов) -->
+  <section class="projects-section">
+    <h2>Наши проекты</h2>
+    <div class="projects-cards">
+      <div class="card">
+        <img src="https://i.postimg.cc/1zqmWjSY/photo-5467372104157624625-x.jpg" alt="Семейный 40">
+        <div class="card-content">
+          <h3>Семейный 40</h3>
+          <p>Большой семейный дом с террасой, три спальни, свободная планировка. Комфорт для всей семьи.</p>
+          <a href="semeiny-40.html">Подробнее</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424526_y.jpg?raw=true" alt="МиниДом 36">
+        <div class="card-content">
+          <h3>МиниДом 36</h3>
+          <p>Компактный и светлый, для небольшой семьи или дачи. Панорамные окна, тёплый фасад, открытая терраса.</p>
+          <a href="minidom-36.html">Подробнее</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://i.postimg.cc/htSQ5xtq/photo-5467925983140117240-y.jpg" alt="Дом Куб 30">
+        <div class="card-content">
+          <h3>Дом Куб 30</h3>
+          <p>Минималистичный дом-куб. Стиль, тепло, функциональность, максимум света для творческих людей.</p>
+          <a href="dom-kub-30.html">Подробнее</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Калькулятор внизу, аккуратный -->
+  <section class="calc-section" style="max-width:430px;margin:44px auto 0 auto;">
+    <h2 style="font-size:1.19rem;margin-bottom:10px;">Калькулятор стоимости <br> с перекрёстным утеплением</h2>
+    <form id="calc-form" class="calc-form" style="background:rgba(44,62,80,.55);border-radius:13px;padding:16px 14px;box-shadow:0 4px 22px #181c2777;">
+      <label>Площадь (м²):
         <input type="number" name="area" min="20" max="400" value="100" required>
       </label>
-      <label>
-        Количество этажей:
-        <select name="floors">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
+      <label>Этажей:
+        <select name="floors"><option value="1">1</option><option value="2">2</option></select>
       </label>
-      <label>
-        Тип фундамента:
-        <select name="foundation">
-          <option value="svai">Свайный</option>
-          <option value="plita">Плита</option>
-        </select>
+      <label>Фундамент:
+        <select name="foundation"><option value="svai">Свайный</option><option value="plita">Плита</option></select>
       </label>
-      <label>
-        Комплектация:
-        <select name="complex">
-          <option value="contour">Тёплый контур</option>
-          <option value="podkluch">Под ключ</option>
-        </select>
-      </label>
-      <label>
-        Перекрёстное утепление:
-        <select name="cross" id="cross">
-          <option value="yes">Да</option>
-          <option value="no">Нет</option>
-        </select>
+      <label>Комплектация:
+        <select name="complex"><option value="contour">Тёплый контур</option><option value="podkluch">Под ключ</option></select>
+</label>
+      <label>Перекрёстное утепление:
+        <select name="cross" id="cross"><option value="yes">Да</option><option value="no">Нет</option></select>
       </label>
       <button type="button" onclick="calcHome()" class="feedback-btn">Рассчитать</button>
     </form>
-    <div id="calc-result" class="features"></div>
+    <div id="calc-result" class="features" style="margin-top:13px;background:transparent;box-shadow:none;"></div>
   </section>
 
-  <!-- Заявка -->
-  <section class="feedback-section">
+  <!-- Форма обратной связи -->
+  <section class="feedback-section" style="margin-top:34px;">
     <h2>Оставить заявку</h2>
     <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
       <label>
@@ -97,7 +105,8 @@
     <span class="icon">👷</span>
     <span class="label">Сергей Прораб</span>
   </button>
-<!-- Скрипт ассистента Chatbase + функция openSergeyChat() -->
+
+  <!-- Скрипт ассистента Chatbase -->
   <script>
     function openSergeyChat() {
       if (window.chatbase && typeof window.chatbase.openChat === 'function') {
@@ -109,6 +118,29 @@
   </script>
   <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="elEbjas8v3UayyJoEx6Fq";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
+  <!-- Калькулятор: JS -->
+  <script>
+    function calcHome() {
+      const area = Number(document.querySelector('[name="area"]').value);
+      const floors = Number(document.querySelector('[name="floors"]').value);
+      const fond = document.querySelector('[name="foundation"]').value;
+      const complex = document.querySelector('[name="complex"]').value;
+      const cross = document.querySelector('[name="cross"]').value === "yes";
+      let base = 27000;
+      if(complex === "podkluch") base += 18500;
+      if(fond === "plita") base += 3000;
+      let total = area * floors * base;
+      let econ = "";
+      if(cross) {
+        total *= 1.11;
+        econ = <br><strong style='color:#89ffb7;'>Экономия на отоплении: до 25% в год!</strong>;
+      }
+      document.getElementById('calc-result').innerHTML =
+        <b>Ориентировочно:</b> <span style="color:#FF6F61;font-size:1.35em;">${total.toLocaleString()} руб.</span>+
+        econ+
+        <br><span style="font-size:0.95em;color:#cfdfef;">*Это примерная цена без отделки и коммуникаций.<br>Для точного расчёта — заполните заявку ниже!</span>;
+    }
   </script>
   <!-- Основные скрипты сайта -->
   <script src="app.js"></script>
