@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>МиниДом 36 | Свой дом НН — компактный проект для комфортной жизни</title>
+  <meta name="description" content="МиниДом 36 — современный каркасный дом небольшой площади и максимального уюта: панорамные окна, терраса, функциональная планировка. Галерея проекта, описание, планы и связь с командой.">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
+
+  <style>
+    :root {
+      --accent: #FF6F61;
+      --bg-main: #1a252f;
+      --bg-card: rgba(44,62,80,0.7);
+      --text-main: #f5f6fa;
+      --fab-bg: #161c25;
+      --fab-outline: #FF6F61;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      padding: 28px 0 14px 0;
+      background: rgba(26,37,47,0.84);
+      position: relative;
+      z-index: 10;
+    }
+    nav a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      transition: color 0.16s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    .project-title {
+      text-align: center;
+      margin: 36px 0 0 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.05rem;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+    }
+    .project-desc {
+      text-align: center;
+      max-width: 660px;
+      margin: 10px auto 32px auto;
+      font-size: 1.13rem;
+      color: #e6eef5;
+    }
+
+    /* Gallery */
+    .gallery-section {
+      margin: 0 auto;
+      max-width: 1000px;
+      padding: 34px 14px 12px 14px;
+      text-align: center;
+    }
+    .gallery-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      color: var(--accent);
+    }
+    .gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .gallery-grid img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #263147;
+      box-shadow: 0 0 8px #2227;
+      transition: transform 0.17s;
+      cursor: pointer;
+    }
+    .gallery-grid img:hover { transform: scale(1.12); }
+
+    /* Plan */
+    .plan-section {
+      max-width: 650px;
+      margin: 0 auto 40px auto;
+      text-align: center;
+    }
+    .plan-section img {
+      width: 95%;
+      max-width: 440px;
+      margin: 2px auto 14px auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px #191e3a88;
+      background: #232c37;
+    }
+    .plan-caption {
+      font-size: 1.03rem;
+      color: #bfcadd;
+      margin-bottom: 16px;
+    }
+
+    /* Features */
+    .features {
+      max-width: 680px;
+      margin: 0 auto 34px auto;
+      padding: 18px 16px;
+      background: var(--bg-card);
+      border-radius: 15px;
+      font-size: 1.08rem;
+      color: #dee7ef;
+      line-height: 1.6;
+    }
+    .features strong { color: var(--accent);}
+    .features ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .features li {
+      padding-left: 0;
+      margin-bottom: 5px;
+    }
+
+    /* Feedback form */
+    .feedback-section {
+      padding: 36px 0 60px 0;
+      text-align: center;
+background: none;
+    }
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 340px;
+      background: rgba(44,62,80,0.65);
+      border-radius: 12px;
+      padding: 22px 18px;
+      font-family: 'Roboto', sans-serif;
+      margin: 0 auto;
+    }
+    .feedback-form label {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      color: #f5f6fa;
+      margin-bottom: 4px;
+    }
+    .feedback-form input {
+      margin-top: 5px;
+      padding: 8px 10px;
+      border: 1px solid #2c3e50;
+      border-radius: 7px;
+      font-size: 1rem;
+      background: #1a252f;
+      color: #fff;
+    }
+    .feedback-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #FF6F61;
+      transition: background 0.2s;
+    }
+    .feedback-btn:hover { background: #ff877a; }
+
+    /* Sergey FAB Button */
+    .sergey-fab-rect {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: var(--fab-bg);
+      color: #f5f6fa;
+      border: 2px solid var(--fab-outline);
+      box-shadow: 0 0 16px var(--fab-outline), 0 0 32px rgba(255,111,97,0.3);
+      border-radius: 12px;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+      outline: none;
+      animation: neonPulse 2.4s infinite alternate ease-in-out;
+    }
+    @keyframes neonPulse {
+      0% {
+        box-shadow: 0 0 8px var(--fab-outline), 0 0 24px var(--fab-outline);
+      }
+      100% {
+        box-shadow: 0 0 24px var(--fab-outline), 0 0 64px var(--fab-outline);
+      }
+    }
+    .sergey-fab-rect .icon {
+      font-size: 1.4em;
+      margin-right: 7px;
+    }
+    @media (max-width: 900px) {
+      .gallery-grid { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      .sergey-fab-rect {
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        bottom: 14px;
+        right: 14px;
+      }
+      .project-title { font-size: 1.45rem; }
+      .gallery-title { font-size: 1.05rem; }
+    }
+  </style>
+
+  <!-- Google Analytics (замени G-XXXXXXXXXX на свой ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+  <!-- Навигация -->
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="semeiny-40.html">Семейный 40</a>
+    <a href="minidom-36.html">МиниДом 36</a>
+    <a href="dom-kub-30.html">Дом Куб 30</a>
+    <a href="technology.html">Технологии</a>
+  </nav>
+
+  <h1 class="project-title" data-aos="fade-down">Проект «МиниДом 36»</h1>
+  <div class="project-desc" data-aos="fade-up">
+    Минималистичный дом на 36 кв.м — максимум комфорта и света. Тёплый фасад, панорамные окна, удобная терраса и современная планировка для маленькой семьи или пары.
+  </div>
+
+  <!-- Галерея -->
+  <section class="gallery-section" data-aos="zoom-in">
+    <div class="gallery-title">Фотогалерея</div>
+    <div class="gallery-grid">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443011784094118439_x.jpg?raw=true" alt="МиниДом 36 фасад">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424523_y.jpg?raw=true" alt="МиниДом 36 гостиная">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424536_y.jpg?raw=true" alt="МиниДом 36 кухня">
+<img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424533_x.jpg?raw=true" alt="МиниДом 36 спальня">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424534_x.jpg?raw=true" alt="МиниДом 36 ванная">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424527_y.jpg?raw=true" alt="МиниДом 36 планировка">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424522_y.jpg?raw=true" alt="МиниДом 36 терраса">
+    </div>
+    <div class="plan-section" data-aos="fade-up" data-aos-delay="80">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424521_y.jpg?raw=true" alt="Планировка МиниДом 36">
+      <div class="plan-caption">
+        Планировка: компактная гостиная и кухня, спальня, ванная, выход на террасу.<br>
+        Максимально уютно и функционально для жизни на природе.
+      </div>
+    </div>
+  </section>
+
+  <!-- Краткое описание преимуществ -->
+  <section class="features" data-aos="fade-up">
+    <strong>Преимущества проекта:</strong>
+    <ul>
+      <li>— Контрастный яркий фасад</li>
+      <li>— Большие панорамные окна и выход на террасу</li>
+      <li>— Энергоэффективные материалы</li>
+      <li>— Современная гостиная-кухня</li>
+      <li>— Оптимально для 2-3 человек</li>
+    </ul>
+  </section>
+
+  <!-- Форма обратной связи -->
+  <section class="feedback-section" data-aos="fade-up">
+    <h2>Заявка на проект</h2>
+    <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
+      <label>
+        Имя:
+        <input type="text" name="name" required placeholder="Ваше имя" />
+      </label>
+      <label>
+        Телефон:
+        <input type="tel" name="phone" required placeholder="Ваш телефон" pattern="[\d\+\-\s]+" />
+      </label>
+      <button type="submit" class="feedback-btn">Отправить заявку</button>
+    </form>
+  </section>
+
+  <!-- Кнопка ассистента Прораб Сергей -->
+  <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом">
+    <span class="icon">👷</span>
+    <span class="label">Сергей Прораб</span>
+  </button>
+
+  <!-- AOS Animation Script -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 700, offset: 60 });
+  </script>
+
+  <!-- Chatbase Ассистент Прораб Сергей -->
+  <script>
+    window.chatbase = window.chatbase || {};
+    window.chatbase.config = { chatbotId: "elEbjas8v3UayyJoEx6Fq" };
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" id="chatbase-script" defer></script>
+
+  <!-- Яндекс.Метрика (замени 12345678 на свой ID) -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
+      m[i].l=1*new Date();
+      k=e.createElement(t), a=e.getElementsByTagName(t)[0], k.async=1, k.src=r, a.parentNode.insertBefore(k,a)
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    ym(12345678, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html>
