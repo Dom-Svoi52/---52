@@ -3,214 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Технологии | Свой дом НН — современные решения в строительстве домов</title>
-  <meta name="description" content="Узнайте, какие технологии мы используем для строительства каркасных домов: чертежи, разрез стены, этапы строительства. Детали, фото, форма консультации, помощь Прораба Сергея.">
+  <title>Технологии | Свой дом НН — современные решения</title>
+  <meta name="description" content="Технологии каркасного домостроения: многослойная стена, этапы работ, разрезы и фото. Оставьте заявку на консультацию и получите помощь эксперта.">
+  <!-- Стили -->
+  <link rel="stylesheet" href="style.css">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-  <!-- AOS Animation CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
-  <style>
-    :root {
-      --accent: #FF6F61;
-      --bg-main: #1a252f;
-      --bg-card: rgba(44,62,80,0.7);
-      --text-main: #f5f6fa;
-      --fab-bg: #161c25;
-      --fab-outline: #FF6F61;
-    }
-   <link rel="stylesheet" href="style.css"> body {
-      margin: 0;
-      font-family: 'Roboto', Arial, sans-serif;
-      background: var(--bg-main);
-      color: var(--text-main);
-      min-height: 100vh;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-      padding: 28px 0 14px 0;
-      background: rgba(26,37,47,0.84);
-      position: relative;
-      z-index: 10;
-    }
-    nav a {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 1.05rem;
-      letter-spacing: 0.02em;
-      transition: color 0.16s;
-    }
-    nav a:hover { color: var(--accent); }
-    .page-title {
-      text-align: center;
-      margin: 36px 0 0 0;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.05rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .tech-desc {
-      text-align: center;
-      max-width: 670px;
-      margin: 14px auto 34px auto;
-      font-size: 1.13rem;
-      color: #e6eef5;
-    }
-    .block-section {
-      background: var(--bg-card);
-      border-radius: 14px;
-      margin: 34px 12px 32px 12px;
-      padding: 24px 18px 20px 18px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--accent);
-      font-size: 1.19rem;
-      margin-bottom: 8px;
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-    .tech-image {
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    .tech-image img {
-      max-width: 96%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 0 14px #1a262f88;
-      background: #263147;
-    }
-    .build-steps-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-      margin-bottom: 16px;
-      margin-top: 8px;
-    }
-    .build-steps-grid img {
-      width: 165px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 9px;
-      background: #263147;
-      box-shadow: 0 0 8px #191e3a40;
-      transition: transform 0.14s;
-      cursor: pointer;
-    }
-    .build-steps-grid img:hover { transform: scale(1.09); }
-    /* Отдельный текст про технологии */
-    .tech-text {
-      text-align: center;
-      margin: 14px auto 12px auto;
-      color: #e0e3eb;
-      font-size: 1.05rem;
-      max-width: 650px;
-      line-height: 1.55;
-    }
-    /* Форма */
-    .feedback-section {
-      padding: 36px 0 60px 0;
-      text-align: center;
-      background: none;
-    }
-    .feedback-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 340px;
-      background: rgba(44,62,80,0.65);
-      border-radius: 12px;
-      padding: 22px 18px;
-      font-family: 'Roboto', sans-serif;
-margin: 0 auto;
-    }
-    .feedback-form label {
-      display: flex;
-      flex-direction: column;
-      font-size: 1rem;
-      color: #f5f6fa;
-      margin-bottom: 4px;
-    }
-    .feedback-form input {
-      margin-top: 5px;
-      padding: 8px 10px;
-      border: 1px solid #2c3e50;
-      border-radius: 7px;
-      font-size: 1rem;
-      background: #1a252f;
-      color: #fff;
-    }
-    .feedback-btn {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 12px 0;
-      border-radius: 8px;
-      font-weight: bold;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.08rem;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      box-shadow: 0 0 12px #FF6F61;
-      transition: background 0.2s;
-    }
-    .feedback-btn:hover { background: #ff877a; }
-    /* Кнопка Сергей */
-    .sergey-fab-rect {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      background: var(--fab-bg);
-      color: #f5f6fa;
-      border: 2px solid var(--fab-outline);
-      box-shadow: 0 0 16px var(--fab-outline), 0 0 32px rgba(255,111,97,0.3);
-      border-radius: 12px;
-      font-family: 'Montserrat', 'Roboto', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: box-shadow 0.2s;
-      cursor: pointer;
-      outline: none;
-      animation: neonPulse 2.4s infinite alternate ease-in-out;
-    }
-    @keyframes neonPulse {
-      0% { box-shadow: 0 0 8px var(--fab-outline), 0 0 24px var(--fab-outline);}
-      100%{ box-shadow: 0 0 24px var(--fab-outline), 0 0 64px var(--fab-outline);}
-    }
-    .sergey-fab-rect .icon { font-size: 1.4em; margin-right: 7px; }
-    @media (max-width: 900px) { .build-steps-grid { flex-direction: column; } }
-    @media (max-width: 600px) {
-      .sergey-fab-rect { padding: 10px 14px; font-size: 0.95rem; bottom: 14px; right: 14px;}
-      .page-title { font-size: 1.45rem; }
-      .section-title { font-size: 1.07rem; }
-    }
-  </style>
-  <!-- Google Analytics (замени G-XXXXXXXXXX на свой ID) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
 </head>
 <body>
-  <!-- Навигация -->
+  <!-- Меню -->
   <nav>
     <a href="index.html">Главная</a>
     <a href="semeiny-40.html">Семейный 40</a>
@@ -219,39 +21,37 @@ margin: 0 auto;
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <h1 class="page-title" data-aos="fade-down">Технологии строительства</h1>
-  <div class="tech-desc" data-aos="fade-up">
-    Мы используем только современные и проверенные решения для строительства каркасных домов.<br>
-    Заботимся о долговечности, тепле и экономии для каждого клиента.
+  <h1 class="page-title">Технологии строительства</h1>
+  <div class="tech-desc">
+    Только современные решения! Ниже — разрез стены, детали используемых материалов и основные этапы работ с фото.
   </div>
 
-  <section class="block-section" data-aos="fade-up">
-    <div class="section-title">Разрез стены (конструкция)</div>
+  <section class="block-section">
+    <div class="section-title">Разрез стены</div>
     <div class="tech-image">
       <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424528_y.jpg?raw=true" alt="Разрез стены">
     </div>
     <div class="tech-text">
-      Многослойная стена: каркас из дерева, утеплители нового поколения, ветрозащита, отделка. Это гарантирует тепло, тишину и минимальные расходы на отопление.
+      Продвинутая конструкция: каркас, утеплители последнего поколения, паро- и гидроизоляция, фасадная и внутренняя отделка, экологичный слоистый пирог.
     </div>
   </section>
 
-  <section class="block-section" data-aos="fade-up" data-aos-delay="120">
+  <section class="block-section">
     <div class="section-title">Этапы строительства</div>
     <div class="build-steps-grid">
       <img src="https://i.postimg.cc/X76sX2Qc/photo-5467372104157624730-x.jpg" alt="Подготовка участка">
       <img src="https://i.postimg.cc/2jZHkpFS/photo-5467372104157624729-y.jpg" alt="Фундамент и каркас">
-<img src="https://i.postimg.cc/htSM1XFX/photo-5467372104157624727-y.jpg" alt="Монтаж стен">
+      <img src="https://i.postimg.cc/htSM1XFX/photo-5467372104157624727-y.jpg" alt="Монтаж стен">
       <img src="https://i.postimg.cc/Vvn4DMLC/photo-5467372104157624726-y.jpg" alt="Отделка фасада">
-      <img src="https://i.postimg.cc/02GcSp4g/photo-5467372104157624728-y.jpg" alt="Чистовая отделка и меблировка">
+      <img src="https://i.postimg.cc/02GcSp4g/photo-5467372104157624728-y.jpg" alt="Финишная отделка и меблировка">
     </div>
     <div class="tech-text">
-      Каждый этап проходит строгий контроль качества: от фундамента до сдачи ключей.<br>
-      Используем только экологичные и долговечные материалы.
+      Каждый этап — под профессиональным контролем, с фотофиксацией и использованием только настоящих материалов. Мы показываем весь процесс!
     </div>
   </section>
 
   <!-- Форма обратной связи -->
-  <section class="feedback-section" data-aos="fade-up">
+  <section class="feedback-section">
     <h2>Консультация по технологиям</h2>
     <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
       <label>
@@ -266,36 +66,24 @@ margin: 0 auto;
     </form>
   </section>
 
-  <!-- Кнопка ассистента Прораб Сергей -->
+  <!-- Кнопка ассистента -->
   <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом">
     <span class="icon">👷</span>
     <span class="label">Сергей Прораб</span>
   </button>
-  <!-- AOS Animation Script -->
+
+  <!-- Скрипты (AOS, Chatbase, app.js) -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ once: true, duration: 700, offset: 60 });
+    if (window.AOS && typeof AOS.init === "function") {
+      AOS.init({ once: true, duration: 700, offset: 60 });
+    }
   </script>
-  <!-- Chatbase Ассистент Прораб Сергей -->
   <script>
     window.chatbase = window.chatbase || {};
     window.chatbase.config = { chatbotId: "elEbjas8v3UayyJoEx6Fq" };
   </script>
   <script src="https://www.chatbase.co/embed.min.js" id="chatbase-script" defer></script>
-  <!-- Яндекс.Метрика (замени 12345678 на свой ID) -->
-  <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-      m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
-      m[i].l=1*new Date();
-      k=e.createElement(t), a=e.getElementsByTagName(t)[0], k.async=1, k.src=r, a.parentNode.insertBefore(k,a)
-    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    ym(12345678, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-    });
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <script src="app.js"></script>
 </body>
 </html>
