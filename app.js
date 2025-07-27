@@ -1,87 +1,107 @@
-// Navigation Toggle
-const navbarToggle = document.querySelector('.navbar__toggle');
-const navbarMenu = document.querySelector('.navbar__menu');
-if (navbarToggle && navbarMenu) {
-  navbarToggle.addEventListener('click', () => {
-    navbarToggle.classList.toggle('active');
-    navbarMenu.classList.toggle('active');
+// 1. Безопасная инициализация AOS (только если он есть)
+if (window.AOS && typeof AOS.init === "function") {
+  AOS.init({ once: true, duration: 700, offset: 60 });
+}
+
+// 2. Lightbox (для галерей) с fade‑анимацией
+document.querySelectorAll('.gallery-grid img, .build-steps-grid img').forEach(img => {
+  img.addEventListener('click', function() {
+    openLightbox(this.src, this.alt || "");
+  });
+});
+
+function openLightbox(src, alt) {
+  document.querySelectorAll('.custom-lightbox').forEach(box => box.remove());
+  let lb = document.createElement('div');
+  lb.className = 'custom-lightbox';
+  lb.innerHTML = 
+    <div class="lightbox-back"></div>
+    <img src="${src}" alt="${alt}" class="lightbox-img" style="opacity:0; transition:opacity .38s;">
+    <button class="lightbox-close" aria-label="Закрыть">&times;</button>
+    <div class="lightbox-caption">${alt}</div>
+  ;
+  document.body.appendChild(lb);
+  setTimeout(() => lb.querySelector('.lightbox-img').style.opacity = 1, 40);
+  lb.querySelector('.lightbox-back').onclick =
+  lb.querySelector('.lightbox-close').onclick = () => lb.remove();
+}
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') {
+    document.querySelectorAll('.custom-lightbox').forEach(box => box.remove());
+  }
+});
+
+// 3. Фокусация на форме, если есть якорь #form
+if (location.hash === '#form' && document.querySelector('.feedback-form input[name="name"]')) {
+  document.querySelector('.feedback-form input[name="name"]').focus();
+}
+
+// 4. Tooltip-подсказка на кнопке Сергей (можно отключить, если не нужно)
+const sergey = document.querySelector('.sergey-fab-rect');
+if (sergey) {
+  sergey.addEventListener('mouseenter', () => {
+    if (!document.querySelector('.pro-sergey-tip')) {
+      const tip = document.createElement('div');
+      tip.className = 'pro-sergey-tip';
+      tip.innerText = 'Онлайн‑консультант: задайте вопрос!';
+      tip.style.position = 'fixed'; tip.style.right = '120px'; tip.style.bottom = '40px';
+      tip.style.background = '#212b37'; tip.style.color = '#fff'; tip.style.padding = '8px 16px';
+      tip.style.borderRadius = '8px'; tip.style.boxShadow = '0 2px 18px #FF6F6190';
+      tip.style.zIndex = '9999'; tip.style.fontSize = '1rem'; tip.style.pointerEvents = 'none';
+      document.body.appendChild(tip);
+      sergey.onmouseleave = () => { tip.remove(); };
+    }
   });
 }
 
-// Smooth scrolling for internal links
-const internalLinks = document.querySelectorAll('a[href^="#"]');
-internalLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    const targetId = link.getAttribute('href').substring(1);
-    const target = document.getElementById(targetId);
-    if (target) {
+// 5. Добавим плавную прокрутку к якорям (если есть ссылки вида #)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e){
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Close mobile menu after click
-      if (navbarMenu && navbarMenu.classList.contains('active')) {
-        if (navbarToggle) navbarToggle.click();
-      }
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
 
-// AOS initialisation (если библиотека подключена)
-if (typeof AOS !== 'undefined') {
-  AOS.init({ once: true, duration: 700, offset: 80 });
-}
-
-/* Calculator Logic */
-const calculatorPrices = {
-  base: {
-    'Семейный 40': 4000000,
-    'МиниДом 36': 3200000,
-    'Дом Куб 30': 2900000
-  },
-  foundation: {
-    'Свайно-винтовой': 0,
-    'МЗЛФ': 150000,
-    'Плита': 350000
-  },
-  options: {
-    'Терраса': 250000,
-    'Кровля металло-черепица': 120000,
-    'Панорамные окна': 200000
-  }
-};
-
-const houseType = document.getElementById('houseType');
-const foundationType = document.getElementById('foundationType');
-const optionCheckboxes = document.querySelectorAll('.options__grid input[type="checkbox"]');
-const totalPriceEl = document.getElementById('totalPrice');
-
-function formatPrice(num) {
-  return new Intl.NumberFormat('ru-RU').format(num) + ' ₽';
-}
-
-function calculateTotal() {
-  const base = calculatorPrices.base[houseType?.value] || 0;
-  const foundation = calculatorPrices.foundation[foundationType?.value] || 0;
-  const optionsSum = Array.from(optionCheckboxes)
-    .filter(cb => cb.checked)
-    .reduce((acc, cb) => acc + (calculatorPrices.options[cb.value] || 0), 0);
-
-  const total = base + foundation + optionsSum;
-  animatePrice(total);
-  return total;
-}
-
-function animatePrice(value) {
-  if (totalPriceEl) {
-    totalPriceEl.classList.add('animate');
-    totalPriceEl.textContent = formatPrice(value);
-    setTimeout(() => totalPriceEl.classList.remove('animate'), 500);
-  }
-}
-
-if (houseType && foundationType && totalPriceEl) {
-  [houseType, foundationType].forEach(select => {
-    select.addEventListener('change', calculateTotal);
+// 6. Динамическая тень на меню при прокрутке (визуальный эффект-модерн)
+const navBar = document.querySelector('nav');
+if (navBar) {
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 30) navBar.style.boxShadow = "0 4px 12px #18253230";
+    else navBar.style.boxShadow = "none";
   });
-  optionCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
-  calculateTotal();
 }
+
+// 7. Анимация появления формы обратной связи (визуальное улучшение)
+const form = document.querySelector('.feedback-form');
+if(form){
+  form.style.opacity = 0;
+  form.style.transform = "translateY(48px)";
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      form.style.transition = "opacity .7s, transform .5s";
+      form.style.opacity = 1;
+      form.style.transform = "translateY(0)";
+    }, 350);
+  });
+}
+
+// 8. Подсветка поля формы при фокусе
+document.querySelectorAll('.feedback-form input').forEach(input => {
+  input.addEventListener('focus', function(){
+    this.style.boxShadow = '0 0 8px #FF6F61cc';
+    this.style.border = '1.5px solid #FF6F61';
+  });
+  input.addEventListener('blur', function(){
+    this.style.boxShadow = '';
+    this.style.border = '';
+  });
+});
+
+// 9. Автоматически подсвечивать активный пункт меню (если ссылки ведут на внутренние страницы)
+const navLinks = document.querySelectorAll('nav a');
+navLinks.forEach(link => {
+  if(location.pathname.endsWith(link.getAttribute('href'))) link.style.color = '#FF6F61';
+});
