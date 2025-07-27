@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <title>Название сайта</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Путь к стилям -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <!-- Навигация -->
   <nav class="navbar">
-    <button class="navbar__toggle" aria-label="Открыть меню">
-      ☰
-    </button>
+    <button class="navbar__toggle" aria-label="Открыть меню">☰</button>
     <ul class="navbar__menu">
       <li><a href="#home">Главная</a></li>
       <li><a href="#projects">Проекты</a></li>
@@ -20,15 +18,8 @@
       <li><a href="#contacts">Контакты</a></li>
     </ul>
   </nav>
-
-  <!-- Основное содержимое -->
-  <section id="home">
-    <h1>Добро пожаловать!</h1>
-  </section>
-  <section id="projects">
-    <h2>Наши проекты</h2>
-    <!-- Здесь добавьте блоки проектов -->
-  </section>
+  <section id="home"><h1>Добро пожаловать!</h1></section>
+  <section id="projects"><h2>Наши проекты</h2></section>
   <section id="calculator">
     <h2>Калькулятор стоимости</h2>
     <div>
@@ -54,12 +45,8 @@
       <div id="totalPrice"></div>
     </div>
   </section>
-  <section id="contacts">
-    <h2>Контакты</h2>
-    <!-- Контактная информация -->
-  </section>
-
-  <!-- Подключение скриптов -->
-  <script src="app.js"></script>
+  <section id="contacts"><h2>Контакты</h2></section>
+  <!-- Путь к скрипту (defer обязательно!) -->
+  <script src="app.js" defer></script>
 </body>
 </html>
