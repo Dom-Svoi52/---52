@@ -1,7 +1,6 @@
 // Navigation Toggle
 const navbarToggle = document.querySelector('.navbar__toggle');
 const navbarMenu = document.querySelector('.navbar__menu');
-
 if (navbarToggle && navbarMenu) {
   navbarToggle.addEventListener('click', () => {
     navbarToggle.classList.toggle('active');
@@ -86,18 +85,3 @@ if (houseType && foundationType && totalPriceEl) {
   optionCheckboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
   calculateTotal();
 }
-
-/* Project Modal Logic (пример структуры, допиши по необходимости) */
-const projectsData = {
-  'semeiny-40': {
-    title: 'Семейный 40',
-    gallery: [
-      'https://i.postimg.cc/Wz2s1pkQ/photo-5467925983140117215-y-1.jpg',
-      'https://i.postimg.cc/NjVGkw3H/photo-5467372104157624624-y.jpg',
-      'https://i.postimg.cc/7hmwGv1b/photo-5467925983140117216-y.jpg'
-    ]
-  }
-  // Добавьте другие проекты по аналогии
-};
-
-// Здесь может быть логика открытия модальных окон для проектов
