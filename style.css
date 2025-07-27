@@ -1,10 +1,8 @@
-/* Основные стили навигации */
 .navbar {
   background: #f0f0f0;
   padding: 10px 20px;
   position: relative;
 }
-
 .navbar__toggle {
   font-size: 28px;
   background: none;
@@ -12,7 +10,6 @@
   cursor: pointer;
   display: none;
 }
-
 .navbar__menu {
   list-style: none;
   margin: 0;
@@ -20,11 +17,7 @@
   display: flex;
   gap: 20px;
 }
-
-.navbar__menu li {
-  display: inline-block;
-}
-
+.navbar__menu li { display: inline-block; }
 .navbar__menu a {
   text-decoration: none;
   color: #333;
@@ -33,16 +26,9 @@
   border-radius: 4px;
   transition: background 0.2s;
 }
-
-.navbar__menu a:hover {
-  background: #ececec;
-}
-
-/* Стили для мобильного меню */
+.navbar__menu a:hover { background: #ececec; }
 @media (max-width: 800px) {
-  .navbar__toggle {
-    display: block;
-  }
+  .navbar__toggle { display: block; }
   .navbar__menu {
     display: none;
     flex-direction: column;
@@ -55,44 +41,17 @@
     z-index: 10;
     border-top: 1px solid #ececec;
   }
-  .navbar__menu.active {
-    display: flex;
-  }
+  .navbar__menu.active { display: flex; }
 }
-
-/* Анимация для калькулятора */
-#totalPrice.animate {
-  animation: price-bounce 0.5s;
-}
-
+#totalPrice.animate { animation: price-bounce 0.5s; }
 @keyframes price-bounce {
   0% { transform: scale(1); }
   30% { transform: scale(1.15); }
   60% { transform: scale(0.95); }
   100% { transform: scale(1); }
 }
-
-/* Пример стилей для калькулятора */
-#calculator select,
-#calculator input[type="checkbox"] {
-  margin: 10px 0;
-}
-
-.options__grid label {
-  margin-right: 15px;
-}
-
-/* Пример секций */
-section {
-  margin: 40px 0;
-}
-
-/* Пример заголовков */
-h1, h2 {
-  color: #234;
-}
-
-/* Для плавного появления меню */
-.navbar__toggle.active {
-  color: #0077cc;
-}
+#calculator select, #calculator input[type="checkbox"] { margin: 10px 0; }
+.options__grid label { margin-right: 15px; }
+section { margin: 40px 0; }
+h1, h2 { color: #234; }
+.navbar__toggle.active { color: #0077cc; }
