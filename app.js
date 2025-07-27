@@ -19,14 +19,14 @@ internalLinks.forEach(link => {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       // Close mobile menu after click
-      if (navbarMenu.classList.contains('active')) {
-        navbarToggle.click();
+      if (navbarMenu && navbarMenu.classList.contains('active')) {
+        if (navbarToggle) navbarToggle.click();
       }
     }
   });
 });
 
-// AOS initialisation (анимации при скролле, если библиотека подключена)
+// AOS initialisation (если библиотека подключена)
 if (typeof AOS !== 'undefined') {
   AOS.init({ once: true, duration: 700, offset: 80 });
 }
@@ -60,8 +60,8 @@ function formatPrice(num) {
 }
 
 function calculateTotal() {
-  const base = calculatorPrices.base[houseType.value] || 0;
-  const foundation = calculatorPrices.foundation[foundationType.value] || 0;
+  const base = calculatorPrices.base[houseType?.value] || 0;
+  const foundation = calculatorPrices.foundation[foundationType?.value] || 0;
   const optionsSum = Array.from(optionCheckboxes)
     .filter(cb => cb.checked)
     .reduce((acc, cb) => acc + (calculatorPrices.options[cb.value] || 0), 0);
@@ -72,9 +72,11 @@ function calculateTotal() {
 }
 
 function animatePrice(value) {
-  totalPriceEl.classList.add('animate');
-  totalPriceEl.textContent = formatPrice(value);
-  setTimeout(() => totalPriceEl.classList.remove('animate'), 500);
+  if (totalPriceEl) {
+    totalPriceEl.classList.add('animate');
+    totalPriceEl.textContent = formatPrice(value);
+    setTimeout(() => totalPriceEl.classList.remove('animate'), 500);
+  }
 }
 
 if (houseType && foundationType && totalPriceEl) {
@@ -85,18 +87,17 @@ if (houseType && foundationType && totalPriceEl) {
   calculateTotal();
 }
 
-/* Project Modal Logic */
+/* Project Modal Logic (пример структуры, допиши по необходимости) */
 const projectsData = {
   'semeiny-40': {
     title: 'Семейный 40',
     gallery: [
       'https://i.postimg.cc/Wz2s1pkQ/photo-5467925983140117215-y-1.jpg',
       'https://i.postimg.cc/NjVGkw3H/photo-5467372104157624624-y.jpg',
-      'https://i.postimg.cc/7hmwGv1b/photo-5467925983140117216-y.jpg',
-      // ... другие ссылки на фото
+      'https://i.postimg.cc/7hmwGv1b/photo-5467925983140117216-y.jpg'
     ]
-  },
-  // ... другие проекты
+  }
+  // Добавьте другие проекты по аналогии
 };
 
-// Здесь может быть логика для модальных окон проектов
+// Здесь может быть логика открытия модальных окон для проектов
