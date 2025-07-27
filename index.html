@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Свой дом НН | Современные каркасные дома</title>
   <meta name="description" content="Свой дом НН — современные энергоэффективные каркасные дома. Калькулятор стоимости, проекты, экспертная консультация, заявка онлайн.">
-  <!-- Стили -->
   <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
 </head>
@@ -18,7 +16,7 @@
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <!-- Hero-видео-блок (минимум текста, максимум видео) -->
+  <!-- Hero-видео-блок -->
   <section class="hero-video-wrap" style="min-height:70vh;">
     <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" id="bgvideo"
       src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1"></video>
@@ -61,12 +59,12 @@
     </div>
   </section>
 
-  <!-- Калькулятор с заголовком об индивидуальном подходе -->
+  <!-- Калькулятор -->
   <section class="calc-section" style="max-width:420px;margin:49px auto 0 auto;">
-    <h2 style="font-size:1.13rem;margin-bottom:8px;color:#FF6F61;text-align:center;">Индивидуальный расчёт для вашего будущего дома</h2>
-    <div style="text-align:center;font-size:.98em;max-width:360px;margin:0 auto 14px auto;color:#bfd6ee;">Выберите параметры и получите честную цену<br> с учётом перекрёстного утепления!</div>
-    <form id="calc-form" class="calc-form" style="background:rgba(44,62,80,.55);border-radius:13px;padding:18px 13px;box-shadow:0 4px 18px #181c2755;">
-      <label>Площадь (м²):
+    <h2 style="font-size:1.13rem;margin-bottom:11px;color:#FF6F61;text-align:center;">Индивидуальный расчёт для вашего будущего дома</h2>
+    <div style="text-align:center;font-size:.98em;max-width:360px;margin:0 auto 14px auto;color:#bfd6ee;">Выберите параметры и рассчитайте стоимость с учётом перекрёстного утепления!</div>
+    <form id="calc-form" class="calc-form" style="display:flex;flex-direction:column;gap:12px;background:rgba(44,62,80,.55);border-radius:13px;padding:18px 13px;box-shadow:0 4px 18px #181c2755;align-items:stretch;">
+      <label>Площадь дома (м²):
         <input type="number" name="area" min="20" max="400" value="100" required>
       </label>
       <label>Этажей:
@@ -81,9 +79,9 @@
       <label>Перекрёстное утепление:
         <select name="cross" id="cross"><option value="yes">Да</option><option value="no">Нет</option></select>
       </label>
-      <button type="button" onclick="calcHome()" class="feedback-btn" style="margin-top:11px;">Рассчитать стоимость</button>
+      <button type="button" onclick="calcHome()" class="feedback-btn" style="margin-top:10px;">Рассчитать стоимость</button>
     </form>
-    <div id="calc-result" class="features" style="margin-top:18px;background:transparent;box-shadow:none;"></div>
+    <div id="calc-result" class="features" style="margin-top:18px;background:transparent;box-shadow:none;text-align:center;"></div>
   </section>
 
   <!-- Форма обратной связи -->
@@ -108,7 +106,7 @@
     <span class="label">Сергей Прораб</span>
   </button>
 
-  <!-- Скрипт ассистента Chatbase -->
+  <!-- Скрипт ASSIST Chatbase -->
   <script>
     function openSergeyChat() {
       if (window.chatbase && typeof window.chatbase.openChat === 'function') {
@@ -121,14 +119,19 @@
   <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="elEbjas8v3UayyJoEx6Fq";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
   </script>
-  <!-- Калькулятор: JS -->
+  <!-- Калькулятор -->
   <script>
     function calcHome() {
-      const area = Number(document.querySelector('[name="area"]').value);
-      const floors = Number(document.querySelector('[name="floors"]').value);
-      const fond = document.querySelector('[name="foundation"]').value;
-      const complex = document.querySelector('[name="complex"]').value;
-      const cross = document.querySelector('[name="cross"]').value === "yes";
+      const form = document.getElementById('calc-form');
+      const area = Number(form.querySelector('[name="area"]').value || 0);
+      const floors = Number(form.querySelector('[name="floors"]').value || 1);
+      const fond = form.querySelector('[name="foundation"]').value;
+      const complex = form.querySelector('[name="complex"]').value;
+      const cross = form.querySelector('[name="cross"]').value === "yes";
+      if(!area || area < 20) {
+        document.getElementById('calc-result').innerHTML = "<span style='color:#FF6F61;'>Введите площадь дома!</span>";
+        return;
+      }
       let base = 27000;
       if(complex === "podkluch") base += 18500;
       if(fond === "plita") base += 3000;
@@ -139,12 +142,12 @@
         econ = <br><strong style='color:#6EFFB7;'>Экономия на отоплении до 25%!</strong>;
       }
       document.getElementById('calc-result').innerHTML =
-        <b>Ориентировочно:</b> <span style="color:#FF6F61;font-size:1.3em;">${total.toLocaleString()} руб.</span>+
+        <b>Ориентировочно:</b> <span style="color:#FF6F61;font-size:1.25em;">${Math.round(total).toLocaleString()} ₽</span>+
         econ+
-        <br><span style="font-size:0.95em;color:#afcce7;">*Для точного расчёта заполните заявку ниже</span>;
+        <br><span style="font-size:.92em;color:#afcce7;">*Для точного расчёта заполните заявку ниже</span>;
     }
   </script>
-  <!-- Основные скрипты сайта -->
+  <!-- Скрипты сайта -->
   <script src="app.js"></script>
 </body>
 </html>
