@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Свой дом НН | Современные каркасные дома</title>
   <meta name="description" content="Свой дом НН — современные энергоэффективные каркасные дома. Калькулятор стоимости, проекты, экспертная консультация, заявка онлайн.">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { padding-top:70px; }
+    nav { position:fixed; top:0; left:0; right:0; }
+    /* ...дополнительные стили здесь (от Клода или твоего style.css)... */
+  </style>
 </head>
 <body>
   <!-- Меню -->
@@ -16,19 +21,18 @@
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <!-- Hero-видео-блок -->
-  <section class="hero-video-wrap" style="min-height:70vh;">
-    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" id="bgvideo"
-      src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1"></video>
-    <div class="hero-content" style="background:rgba(26,37,47,0.12);padding:34px 8px 40px 8px;">
-      <h1 style="font-size:2.1rem;letter-spacing:0.01em;">Свой дом <span style="color:#FF6F61;">НН</span></h1>
-      <p style="font-size:1.08rem;max-width:340px;margin:13px auto 0 auto;">
-        Тёплые каркасные дома<br> с перекрёстным утеплением
-      </p>
+  <!-- Hero-видео-фон -->
+  <section class="hero-video-wrap">
+    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto">
+      <source src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>Свой дом <span style="color:#FF6F61;">НН</span></h1>
+      <p>Тёплые каркасные дома<br> с перекрёстным утеплением</p>
     </div>
   </section>
 
-  <!-- Блок проектов (карточки домов) -->
+  <!-- Проекты -->
   <section class="projects-section">
     <h2>Наши проекты</h2>
     <div class="projects-cards">
@@ -60,32 +64,46 @@
   </section>
 
   <!-- Калькулятор -->
-  <section class="calc-section" style="max-width:420px;margin:49px auto 0 auto;">
-    <h2 style="font-size:1.13rem;margin-bottom:11px;color:#FF6F61;text-align:center;">Индивидуальный расчёт для вашего будущего дома</h2>
-    <div style="text-align:center;font-size:.98em;max-width:360px;margin:0 auto 14px auto;color:#bfd6ee;">Выберите параметры и рассчитайте стоимость с учётом перекрёстного утепления!</div>
-    <form id="calc-form" class="calc-form" style="display:flex;flex-direction:column;gap:12px;background:rgba(44,62,80,.55);border-radius:13px;padding:18px 13px;box-shadow:0 4px 18px #181c2755;align-items:stretch;">
+  <section class="calc-section">
+    <h2>Индивидуальный расчёт для вашего будущего дома</h2>
+    <div class="calc-description">
+      Выберите параметры и получите детальный расчёт стоимости с учётом всех особенностей!
+    </div>
+    <div class="calc-form" style="display:flex;flex-direction:column;gap:12px;">
       <label>Площадь дома (м²):
-        <input type="number" name="area" min="20" max="400" value="100" required>
+        <input type="number" id="area" min="20" max="400" value="100" required>
       </label>
-      <label>Этажей:
-        <select name="floors"><option value="1">1</option><option value="2">2</option></select>
+      <label>Количество этажей:
+        <select id="floors">
+          <option value="1">1 этаж</option>
+          <option value="2">2 этажа</option>
+        </select>
       </label>
-      <label>Фундамент:
-        <select name="foundation"><option value="svai">Свайный</option><option value="plita">Плита</option></select>
-</label>
+      <label>Тип фундамента:
+        <select id="foundation">
+          <option value="svai">Свайный фундамент</option>
+          <option value="plita">Плитный фундамент</option>
+        </select>
+      </label>
       <label>Комплектация:
-        <select name="complex"><option value="contour">Тёплый контур</option><option value="podkluch">Под ключ</option></select>
-      </label>
+        <select id="complex">
+          <option value="contour">Тёплый контур</option>
+          <option value="podkluch">Под ключ</option>
+        </select>
+</label>
       <label>Перекрёстное утепление:
-        <select name="cross" id="cross"><option value="yes">Да</option><option value="no">Нет</option></select>
+        <select id="cross">
+          <option value="yes">Да (+11% к стоимости, экономия до 25%)</option>
+          <option value="no">Нет</option>
+        </select>
       </label>
-      <button type="button" onclick="calcHome()" class="feedback-btn" style="margin-top:10px;">Рассчитать стоимость</button>
-    </form>
-    <div id="calc-result" class="features" style="margin-top:18px;background:transparent;box-shadow:none;text-align:center;"></div>
+      <button type="button" onclick="calcHome()" class="feedback-btn" style="margin-top:14px;">Рассчитать стоимость</button>
+    </div>
+    <div id="calc-result" class="calc-result" style="display: none; margin-top:18px;"></div>
   </section>
 
   <!-- Форма обратной связи -->
-  <section class="feedback-section" style="margin-top:39px;">
+  <section class="feedback-section">
     <h2>Оставить заявку</h2>
     <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
       <label>
@@ -94,9 +112,9 @@
       </label>
       <label>
         Телефон:
-        <input type="tel" name="phone" required placeholder="Ваш телефон" pattern="[\d\+\-\s]+" />
+        <input type="tel" name="phone" required placeholder="+7 (_) _--" pattern="^(\+7|8)[\s\(]?\d{3}[\)\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$" />
       </label>
-      <button type="submit" class="feedback-btn">Отправить</button>
+      <button type="submit" class="feedback-btn">Отправить заявку</button>
     </form>
   </section>
 
@@ -106,48 +124,74 @@
     <span class="label">Сергей Прораб</span>
   </button>
 
-  <!-- Скрипт ASSIST Chatbase -->
   <script>
+    // Калькулятор стоимости
+    function calcHome() {
+      const area = Number(document.getElementById('area').value || 0);
+      const floors = Number(document.getElementById('floors').value || 1);
+      const foundation = document.getElementById('foundation').value;
+      const complex = document.getElementById('complex').value;
+      const cross = document.getElementById('cross').value === "yes";
+      const resultDiv = document.getElementById('calc-result');
+
+      if (!area || area < 20) {
+        resultDiv.innerHTML = "<span style='color:#FF6F61;'>Пожалуйста, введите площадь дома от 20 м²!</span>";
+        resultDiv.style.display = 'block';
+        return;
+      }
+
+      let basePrice = 27000;
+      const components = {
+        base: area * floors * basePrice,
+        complex: complex === "podkluch" ? area * floors * 18500 : 0,
+        foundation: foundation === "plita" ? area * floors * 3000 : 0,
+        cross: 0
+      };
+
+      let subtotal = components.base + components.complex + components.foundation;
+      if (cross) {
+        components.cross = subtotal * 0.11;
+        subtotal += components.cross;
+      }
+
+      let breakdown = <div class='price-breakdown'>
+        <div><span>Базовая стоимость (${area} м² × ${floors} эт.):</span><span>${components.base.toLocaleString()} ₽</span></div>;
+      if (components.complex > 0) {
+        breakdown += <div><span>Комплектация "Под ключ":</span><span>+${components.complex.toLocaleString()} ₽</span></div>;
+      }
+      if (components.foundation > 0) {
+        breakdown += <div><span>Плитный фундамент:</span><span>+${components.foundation.toLocaleString()} ₽</span></div>;
+      }
+      if (components.cross > 0) {
+        breakdown += <div><span>Перекрёстное утепление:</span><span>+${components.cross.toLocaleString()} ₽</span></div>;
+      }
+      breakdown += </div>;
+      const economyText = cross ? <div class='economy-bonus'>💰 Экономия на отоплении до 25% в год!</div> : '';
+
+      resultDiv.innerHTML = 
+        <div><strong>Итоговая стоимость:</strong></div>
+        <div class="price-display">${Math.round(subtotal).toLocaleString()} ₽</div>
+        ${breakdown}
+        ${economyText}
+        <div style="font-size:0.9rem;color:#afcce7;margin-top:15px;">
+          *Расчёт предварителен. Для точной стоимости заполните заявку ниже
+        </div>
+      ;
+      resultDiv.style.display = 'block';
+    }
+
     function openSergeyChat() {
       if (window.chatbase && typeof window.chatbase.openChat === 'function') {
-        window.chatbase.openChat();
+window.chatbase.openChat();
       } else {
-        alert("Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите секунду...");
+        alert("Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите немного...");
       }
     }
   </script>
+  <!-- Chatbase скрипт -->
   <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="elEbjas8v3UayyJoEx6Fq";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
   </script>
-  <!-- Калькулятор -->
-  <script>
-    function calcHome() {
-      const form = document.getElementById('calc-form');
-      const area = Number(form.querySelector('[name="area"]').value || 0);
-      const floors = Number(form.querySelector('[name="floors"]').value || 1);
-      const fond = form.querySelector('[name="foundation"]').value;
-      const complex = form.querySelector('[name="complex"]').value;
-      const cross = form.querySelector('[name="cross"]').value === "yes";
-      if(!area || area < 20) {
-        document.getElementById('calc-result').innerHTML = "<span style='color:#FF6F61;'>Введите площадь дома!</span>";
-        return;
-      }
-      let base = 27000;
-      if(complex === "podkluch") base += 18500;
-      if(fond === "plita") base += 3000;
-      let total = area * floors * base;
-      let econ = "";
-      if(cross) {
-        total *= 1.11;
-        econ = <br><strong style='color:#6EFFB7;'>Экономия на отоплении до 25%!</strong>;
-      }
-      document.getElementById('calc-result').innerHTML =
-        <b>Ориентировочно:</b> <span style="color:#FF6F61;font-size:1.25em;">${Math.round(total).toLocaleString()} ₽</span>+
-        econ+
-        <br><span style="font-size:.92em;color:#afcce7;">*Для точного расчёта заполните заявку ниже</span>;
-    }
-  </script>
-  <!-- Скрипты сайта -->
   <script src="app.js"></script>
 </body>
 </html>
