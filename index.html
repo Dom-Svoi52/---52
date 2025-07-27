@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <title>Название сайта</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Путь к стилям -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Навигация -->
+  <!-- Навигация и другие секции -->
   <nav class="navbar">
     <button class="navbar__toggle" aria-label="Открыть меню">☰</button>
     <ul class="navbar__menu">
@@ -22,31 +21,9 @@
   <section id="projects"><h2>Наши проекты</h2></section>
   <section id="calculator">
     <h2>Калькулятор стоимости</h2>
-    <div>
-      <label>Тип дома:
-        <select id="houseType">
-          <option value="Семейный 40">Семейный 40</option>
-          <option value="МиниДом 36">МиниДом 36</option>
-          <option value="Дом Куб 30">Дом Куб 30</option>
-        </select>
-      </label>
-      <label>Тип фундамента:
-        <select id="foundationType">
-          <option value="Свайно-винтовой">Свайно-винтовой</option>
-          <option value="МЗЛФ">МЗЛФ</option>
-          <option value="Плита">Плита</option>
-        </select>
-      </label>
-      <div class="options__grid">
-        <label><input type="checkbox" value="Терраса"> Терраса</label>
-        <label><input type="checkbox" value="Кровля металло-черепица"> Кровля металло-черепица</label>
-        <label><input type="checkbox" value="Панорамные окна"> Панорамные окна</label>
-      </div>
-      <div id="totalPrice"></div>
-    </div>
+    <!-- ... -->
   </section>
   <section id="contacts"><h2>Контакты</h2></section>
-  <!-- Путь к скрипту (defer обязательно!) -->
   <script src="app.js" defer></script>
 </body>
 </html>
