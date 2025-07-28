@@ -17,6 +17,7 @@
       --card-bg: rgba(32,38,62, 0.93);
       --input-bg: #222641;
       --transition: 0.35s cubic-bezier(.4,.9,.5,1.2);
+      --fab-hover: #63ffaa;
     }
     html, body {
       height: 100%;
@@ -254,10 +255,86 @@
       .features { padding: 15px 11px;}
       .gallery-grid img, .plan-section img { height: 115px; }
     }
-    /* Мини-анимация lazy (альтернатива AOS, для совместимости и скорости) */
     [data-aos] { opacity:0; transform:translateY(30px);}
     .aos-animate { opacity:1!important; transform:none!important; transition:opacity 0.6s, transform .65s;}
     body,html { touch-action: manipulation; }
+    /* Сергей FAB */
+    .sergey-fab {
+      position: fixed;
+      right: 27px;
+      bottom: 30px;
+      z-index: 1020;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(140deg, var(--accent) 65%, #3ef9a8 100%);
+      color: #1a2233;
+      border-radius: 100px;
+      box-shadow: 0 2px 25px 0 #16d6f7b4, 0 2px 7px 1px #169aef2d;
+      padding: 0 20px 0 10px;
+      height: 56px;
+      min-width: 56px;
+      font-family: "Montserrat",sans-serif;
+      font-weight: 700;
+      font-size: 1.11rem;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: box-shadow .17s, background .26s;
+      gap: 10px;
+      animation: fadeInUp 0.64s 0.25s both;
+    }
+    .sergey-fab:hover, .sergey-fab:focus {
+      background: linear-gradient(110deg, #63ffaa 40%, var(--accent) 100%);
+      box-shadow: 0 6px 36px #08f4e766, 0 2px 7px 1px #169aef1d;
+      color: #1a2440;
+    }
+    .sergey-fab .icon {
+      font-size: 2.1rem;
+      margin-left: 2px;
+      margin-right: 0;
+      line-height: 1;
+      filter: drop-shadow(0 1px 4px #fff7);
+      user-select: none;
+    }
+    .sergey-fab .label {
+      font-size: 1.04rem;
+      font-weight: 700;
+      padding-left: 7px;
+      padding-right: 8px;
+      display: none;
+    }
+    .sergey-fab:hover .label, .sergey-fab:focus .label {
+      display: inline;
+      animation: fadeInUp .21s;
+    }
+    @media (max-width:600px) {
+      .sergey-fab {height:46px;min-width:46px;font-size:.95rem;padding:0 13px 0 5px;}
+      .sergey-fab .icon {font-size:1.3em;}
+    }
+    .sergey-fab-tooltip {
+      display: none;
+      position: absolute;
+      right: 0;
+      bottom: 68px;
+      background: #101522ee;
+      color: #fff;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: .92rem;
+      box-shadow: 0 3px 18px #16192e88;
+      white-space: nowrap;
+      z-index: 9999;
+      font-family: "Montserrat",sans-serif;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .15s;
+    }
+    .sergey-fab:hover + .sergey-fab-tooltip,
+    .sergey-fab:focus + .sergey-fab-tooltip {
+      display: block;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -331,18 +408,21 @@
     </div>
   </div>
 
-  <!-- Кнопка ассистента -->
-  <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом" style="position:fixed;bottom:24px;right:30px;z-index:100;">
+  <!-- Кнопка ассистента прораб Сергей -->
+  <button class="sergey-fab" id="sergeyFab" aria-label="Чат с Сергеем Прорабом" type="button">
     <span class="icon">👷</span>
     <span class="label">Сергей Прораб</span>
   </button>
+  <span class="sergey-fab-tooltip" id="sergeyFabTooltip">Задайте вопрос прорабу прямо сейчас!</span>
 
-  <!-- JS-модалка и ассистент -->
+  <!-- JS: Модальное окно, плавная анимация и ассистент -->
   <script>
     // Плавное появление блоков (pseudo-AOS)
     function lazyAnimate() {
       document.querySelectorAll('[data-aos]').forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight-100){el.classList.add('aos-animate');}
+        if(el.getBoundingClientRect().top < window.innerHeight-100){
+          el.classList.add('aos-animate');
+        }
       });
     }
     window.addEventListener('scroll', lazyAnimate);
@@ -350,7 +430,7 @@
       setTimeout(lazyAnimate, 400);
     });
 
-    // Модальное окно обратной связи
+    // Модальная форма обратной связи
     const openBtn=document.getElementById('openFeedbackBtn'),
           modal=document.getElementById('feedbackModal'),
           closeBtn=document.getElementById('closeFeedbackBtn');
@@ -358,9 +438,44 @@
     closeBtn.onclick = ()=>{modal.style.display="none";modal.querySelector('.fast-modal').classList.remove('aos-animate');}
     window.onclick = e=>{ if(e.target===modal){modal.style.display="none";modal.querySelector('.fast-modal').classList.remove('aos-animate');} };
 
-    // Chatbase ассистент
-    window.chatbase=window.chatbase||{}; window.chatbase.config={chatbotId:"elEbjas8v3UayyJoEx6Fq"};
+    // Сергей прораб ассистент — обработка кнопки
+    function openSergeyChat() {
+      if (window.chatbase && typeof window.chatbase.openChat === 'function') {
+        window.chatbase.openChat();
+      } else {
+        alert("Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите секунду...");
+      }
+    }
+    document.getElementById('sergeyFab').onclick = openSergeyChat;
+    // Показываем тултип только при ховере (на десктопе) — соответствует стилю
+
+    // Chatbase динамический скрипт подключения
+    (function(){
+      if(!window.chatbase || (typeof window.chatbase === "function" && window.chatbase("getState")!=="initialized")){
+        window.chatbase=(...arguments)=>{
+          if(!window.chatbase.q){window.chatbase.q=[]}
+          window.chatbase.q.push(arguments)
+        };
+        window.chatbase=new Proxy(window.chatbase,{
+          get(target,prop){
+            if(prop==="q"){return target.q}
+            return (...args)=>target(prop,...args)
+          }
+        });
+      }
+      const onLoad=function(){
+        const script=document.createElement("script");
+        script.src="https://www.chatbase.co/embed.min.js";
+        script.id="chatbase-script";
+        script.setAttribute('chatbotId','elEbjas8v3UayyJoEx6Fq');
+        document.body.appendChild(script)
+      };
+      if(document.readyState==="complete"){
+        onLoad();
+      }else{
+        window.addEventListener("load",onLoad)
+      }
+    })();
   </script>
-  <script src="https://www.chatbase.co/embed.min.js" id="chatbase-script" defer></script>
 </body>
 </html>
