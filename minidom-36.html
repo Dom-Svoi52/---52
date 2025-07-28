@@ -2,22 +2,124 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>МиниДом 36 | Свой дом НН — компактный проект для комфортной жизни</title>
   <meta name="description" content="МиниДом 36 — современный каркасный дом небольшой площади и максимального уюта: панорамные окна, терраса, функциональная планировка. Галерея проекта, описание, планы и связь с командой.">
-  <!-- Стили -->
-  <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
+  <style>
+    :root{
+      --accent:#5ddff9;
+      --accent-dark:#3ed3ff;
+      --bg:#181828;
+      --card-bg:rgba(32,38,62,0.93);
+      --input-bg:#222641;
+      --text:#fff;
+      --text-alt:#dafaff;
+      --transition:0.32s cubic-bezier(.4,.9,.5,1.2);
+    }
+    html,body{margin:0;padding:0;min-height:100vh;font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    *{box-sizing:border-box}
+
+    nav{
+      display:flex;gap:1.5rem;justify-content:flex-start;align-items:center;
+      padding:18px 4vw 10px 4vw;
+      background:rgba(30,34,54,0.97);box-shadow:0 2px 8px 0 rgba(25,32,41,0.08);
+      border-bottom:2px solid rgba(93,223,249,0.08);position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(6px);
+    }
+    nav a{
+      font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:700;text-decoration:none;text-transform:uppercase;
+      color:var(--text);padding:10px 20px;border-radius:22px;transition:background var(--transition),color var(--transition);letter-spacing:1.1px;
+    }
+    nav a:hover,nav a.active{background:var(--accent);color:var(--bg);}
+
+    .project-title{
+      font-family:'Montserrat',sans-serif;font-size:2.1rem;font-weight:800;margin:2.7rem 0 1rem 0;text-align:center;letter-spacing:1.2px;color:var(--accent);text-shadow:0 2px 14px #2227;
+    }
+    .project-desc{
+      font-size:1.13rem;text-align:center;color:#e6fcfe;max-width:500px;margin:0 auto 2rem auto;line-height:1.55;
+    }
+
+    /* ГАЛЕРЕЯ */
+    .gallery-section{margin:2rem 0 1.5rem 0;padding:0 4vw;}
+    .gallery-title{
+      font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.13rem;margin-bottom:1rem;color:var(--text);letter-spacing:0.04em;text-align:left;
+    }
+    .gallery-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:22px;margin-bottom:2.5rem;align-items:stretch;
+    }
+    .gallery-grid img{
+      width:100%;height:400px;object-fit:cover;object-position:center center;border-radius:19px;box-shadow:0 8px 34px #29297627,0 2px 8px #1aeafd23;
+      transition:transform .24s cubic-bezier(.5,1.3,.5,1),box-shadow .13s;cursor:pointer;background:#202432;filter:saturate(1.07) brightness(1.08);
+      display:block;
+    }
+    .gallery-grid img:hover{
+      transform:scale(1.045) translateY(-7px);
+      box-shadow:0 7px 32px #13e6fa52;
+      z-index:10;
+    }
+    .plan-section{display:flex;flex-direction:column;align-items:center;margin:2.5rem 0 0 0;gap:1.23rem;}
+    .plan-section img{width:430px;max-width:100%;height:320px;object-fit:cover;object-position:center;border-radius:14px;box-shadow:0 5px 23px #2058;background:#222641;}
+    .plan-caption{color:#dbefff;font-size:1.1rem;text-align:center;max-width:420px;line-height:1.55;background:rgba(24,28,53,0.84);border-radius:12px;padding:13px 22px;}
+
+    /* Преимущества */
+    .features{margin:2.7rem auto 2.9rem auto;max-width:430px;background:var(--card-bg);border-radius:16px;box-shadow:0 2px 16px #1126;
+      padding:20px 27px;color:#c6effb;}
+    .features ul{margin:0;padding:10px 0 0 24px;font-size:1.05rem;color:#f2ffff;}
+    .features li{margin-bottom:4px;}
+
+    .open-feedback, .feedback-btn{
+      font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.09rem;letter-spacing:0.07em;
+      padding:13px 0;background:linear-gradient(89deg,var(--accent),#63ffaa);color:#181828;border-radius:13px;border:none;margin-top:11px;cursor:pointer;box-shadow:0 2px 6px #14eafd55;width:100%;transition:background 0.23s, box-shadow 0.17s;
+      display:block;text-align:center;max-width:292px;margin:0 auto 3rem auto;
+    }
+    .open-feedback:hover, .feedback-btn:hover{
+      background:linear-gradient(-89deg,#3ed3ff,var(--accent));
+      box-shadow:0 4px 16px #18d7ff57;
+    }
+
+    .fast-modal-backdrop{position:fixed;inset:0;background:rgba(22,30,45,0.76);z-index:1000;display:none;}
+    .fast-modal{
+      display:flex;flex-direction:column;gap:1rem;background:var(--card-bg);border-radius:20px;box-shadow:0 6px 40px #0adff977;
+      padding:30px 27px 22px 27px;width:92vw;max-width:330px;margin:8vh auto;animation:fadeInUp .42s;position:relative;
+    }
+    .fast-modal-close{position:absolute;top:15px;right:17px;cursor:pointer;font-size:1.38rem;color:var(--accent);background:none;border:none;padding:3px 8px;opacity:.85;transition:opacity .13s;}
+    .fast-modal-close:hover{opacity:1;}
+    .feedback-form label{display:block;margin:9px 0 12px 0;color:#b5efff;font-size:1.01rem;}
+    .feedback-form input[type="text"],.feedback-form input[type="tel"]{
+      width:100%;padding:13px 10px;margin-top:5px;background:var(--input-bg);border:none;border-radius:10px;font-size:1.09rem;color:var(--text);outline:none;transition:box-shadow .17s;box-shadow:0 1px 7px #18cff833;font-family:inherit;
+    }
+    .feedback-form input:focus{box-shadow:0 2px 16px #2cdeeaa4;}
+    @keyframes fadeInUp{0%{opacity:0;transform:translateY(25px);}100%{opacity:1;transform:translateY(0);}}
+
+    .sergey-fab-rect{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:15px 20px;border-radius:25px;cursor:pointer;box-shadow:0 5px 20px rgba(93,223,249,.22);transition:transform .3s,box-shadow .3s;display:flex;align-items:center;gap:10px;font-weight:600;z-index:1000;font-size:1.08rem;font-family:'Montserrat',sans-serif;}
+    .sergey-fab-rect:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(93,223,249,.38);}
+    .sergey-fab-rect .label{padding-left:7px;}
+    .sergey-fab-rect svg{width:22px;height:22px;fill:currentColor;margin-right:0;}
+
+    @media (max-width:850px){
+      .gallery-grid{grid-template-columns:1fr 1fr;}
+      .gallery-grid img{height:220px;}
+      .plan-section img{height:170px;width:99vw;}
+    }
+    @media (max-width:600px){
+      .project-title{font-size:1.13rem;}
+      .project-desc{font-size:.96rem;}
+      .features{padding:14px 8px;}
+      .gallery-grid{grid-template-columns:1fr;}
+      .gallery-grid img{height:200px;}
+      .plan-section img{height:110px;}
+      .sergey-fab-rect{bottom:16px;right:12px;padding:10px 13px;font-size:.99rem;}
+      .sergey-fab-rect .label{display:none;}
+    }
+  </style>
 </head>
 <body>
   <!-- Меню -->
   <nav>
-    <a href="index.html">Главная</a>
-    <a href="semeiny-40.html">Семейный 40</a>
-    <a href="minidom-36.html">МиниДом 36</a>
-    <a href="dom-kub-30.html">Дом Куб 30</a>
+    <a href="index.html" class="active">Главная</a>
     <a href="technology.html">Технологии</a>
   </nav>
 
@@ -30,16 +132,16 @@
   <section class="gallery-section">
     <div class="gallery-title">Фотогалерея</div>
     <div class="gallery-grid">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443011784094118439_x.jpg?raw=true" alt="МиниДом 36 фасад">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424523_y.jpg?raw=true" alt="МиниДом 36 гостиная">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424536_y.jpg?raw=true" alt="МиниДом 36 кухня">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424533_x.jpg?raw=true" alt="МиниДом 36 спальня">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424534_x.jpg?raw=true" alt="МиниДом 36 ванная">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424527_y.jpg?raw=true" alt="МиниДом 36 планировка">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424522_y.jpg?raw=true" alt="МиниДом 36 терраса">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443011784094118439_x.jpg?raw=true" alt="МиниДом 36 фасад" loading="lazy">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424523_y.jpg?raw=true" alt="МиниДом 36 гостиная" loading="lazy">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424536_y.jpg?raw=true" alt="МиниДом 36 кухня" loading="lazy">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424533_x.jpg?raw=true" alt="МиниДом 36 спальня" loading="lazy">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424534_x.jpg?raw=true" alt="МиниДом 36 ванная" loading="lazy">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424527_y.jpg?raw=true" alt="МиниДом 36 планировка" loading="lazy">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424522_y.jpg?raw=true" alt="МиниДом 36 терраса" loading="lazy">
     </div>
     <div class="plan-section">
-      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424521_y.jpg?raw=true" alt="Планировка МиниДом 36">
+      <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424521_y.jpg?raw=true" alt="Планировка МиниДом 36" loading="lazy">
       <div class="plan-caption">
         Планировка: компактная гостиная и кухня, спальня, ванная, выход на террасу.<br>
         Максимально уютно и функционально для жизни на природе.
@@ -58,39 +160,52 @@
     </ul>
   </section>
 
-  <!-- Форма обратной связи -->
-  <section class="feedback-section">
-    <h2>Заявка на проект</h2>
-    <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
-      <label>
-        Имя:
-        <input type="text" name="name" required placeholder="Ваше имя" />
-      </label>
-      <label>
-        Телефон:
-        <input type="tel" name="phone" required placeholder="Ваш телефон" pattern="[\d\+\-\s]+" />
-      </label>
-      <button type="submit" class="feedback-btn">Отправить заявку</button>
-    </form>
-  </section>
+  <!-- Кнопка для открытия формы обратной связи -->
+  <button class="open-feedback" aria-label="Оставить заявку" id="openFeedbackBtn">
+    Оставить заявку
+  </button>
 
-  <!-- Кнопка ассистента -->
-  <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом">
-    <span class="icon">👷</span>
+  <!-- Модальная форма обратной связи -->
+  <div class="fast-modal-backdrop" id="feedbackModal">
+    <div class="fast-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+      <button class="fast-modal-close" id="closeFeedbackBtn" aria-label="Закрыть">×</button>
+      <h2 id="feedbackTitle" style="margin-bottom:10px;">Заявка на проект</h2>
+      <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form" autocomplete="on">
+        <label>
+          Имя:
+          <input type="text" name="name" required placeholder="Ваше имя" autocomplete="name"/>
+        </label>
+        <label>
+          Телефон:
+          <input type="tel" name="phone" required placeholder="Ваш телефон" pattern="[\d\+\-\s]+" autocomplete="tel"/>
+        </label>
+        <button type="submit" class="feedback-btn">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Кнопка чат-бота -->
+  <button class="sergey-fab-rect" onclick="openSergeyChat()" aria-label="Чат с Сергеем Прорабом" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.486 3 2 6.94 2 11.5c0 2.272 1.127 4.313 2.962 5.865L4 22l4.278-2.138A11.86 11.86 0 0 0 12 21c5.514 0 10-3.94 10-8.5S17.514 3 12 3z"/></svg>
     <span class="label">Сергей Прораб</span>
   </button>
-<!-- Скрипты (AOS, Chatbase, app.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
   <script>
-    if (window.AOS && typeof AOS.init === "function") {
-      AOS.init({ once: true, duration: 700, offset: 60 });
+    // Модальная форма обратной связи
+    const openBtn=document.getElementById('openFeedbackBtn'),
+          modal=document.getElementById('feedbackModal'),
+          closeBtn=document.getElementById('closeFeedbackBtn');
+    openBtn.onclick=()=>{modal.style.display="block";setTimeout(()=>{modal.querySelector('.fast-modal').style.opacity=1;},10);}
+    closeBtn.onclick=()=>{modal.style.display="none";modal.querySelector('.fast-modal').style.opacity=0;}
+    window.onclick=e=>{ if(e.target===modal){modal.style.display="none";modal.querySelector('.fast-modal').style.opacity=0;} };
+
+    // Кнопка ассистента
+    function openSergeyChat(){
+      if(window.chatbase&&typeof window.chatbase.openChat==='function'){window.chatbase.openChat();}
+      else{alert('Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите немного...');}
     }
   </script>
-  <script>
-    window.chatbase = window.chatbase || {};
-    window.chatbase.config = { chatbotId: "elEbjas8v3UayyJoEx6Fq" };
-  </script>
-  <script src="https://www.chatbase.co/embed.min.js" id="chatbase-script" defer></script>
-  <script src="app.js"></script>
+  <!-- Chatbase -->
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="elEbjas8v3UayyJoEx6Fq" defer></script>
 </body>
 </html>
