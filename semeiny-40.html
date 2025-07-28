@@ -2,22 +2,268 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Семейный 40 | Свой дом НН — проект для большой семьи</title>
   <meta name="description" content="Проект «Семейный 40» — уютный и стильный каркасный дом для семьи. Гостиная, терраса, три спальни, фотогалерея, планировка, оставить заявку.">
-  <!-- Стили -->
-  <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
+  <style>
+    :root {
+      --bg: #181828;
+      --fg: #fff;
+      --accent: #5ddff9;
+      --menu-bg: rgba(30,34,54,0.97);
+      --card-bg: rgba(32,38,62, 0.93);
+      --input-bg: #222641;
+      --transition: 0.35s cubic-bezier(.4,.9,.5,1.2);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Roboto", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 18px 4vw 10px 4vw;
+      background: var(--menu-bg);
+      box-shadow: 0 2px 8px 0 rgba(25,32,41,0.08);
+      backdrop-filter: blur(6px);
+      border-bottom: 2px solid rgba(93,223,249,0.08);
+      position: sticky;
+      top: 0; left: 0; right: 0;
+      z-index: 20;
+    }
+    nav a {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: var(--fg);
+      background: none;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 22px;
+      transition: background var(--transition), color var(--transition);
+      letter-spacing: 1.1px;
+    }
+    nav a:hover, nav a.active {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .project-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 2.1rem;
+      font-weight: bold;
+      margin: 3rem 0 1rem 0;
+      text-align: center;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      text-shadow: 0 2px 12px #2226;
+      animation: fadeInUp 0.8s;
+    }
+    @keyframes fadeInUp {
+      0% {opacity:0;transform:translateY(25px);}
+      100% {opacity:1;transform:translateY(0);}
+    }
+    .project-desc {
+      font-size: 1.18rem;
+      text-align: center;
+      color: #e6fcfe;
+      max-width: 560px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.55;
+      animation: fadeInUp 0.85s 0.04s both;
+    }
+    .gallery-section {
+      margin: 2rem 0 1rem 0;
+      padding: 0 4vw;
+      animation: fadeInUp 0.8s 0.08s both;
+    }
+    .gallery-title {
+      font-family: "Montserrat",sans-serif;
+      font-weight: 700;
+      font-size: 1.28rem;
+      margin-bottom: 1rem;
+      color: var(--fg);
+      letter-spacing: 0.04em;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 2rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 2px 18px #1114;
+      transition: transform .28s cubic-bezier(.5,1.3,.5,1),box-shadow .18s;
+      will-change: transform;
+      cursor: pointer;
+      background: #202432;
+      filter: saturate(1.06) brightness(1.05);
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.06) translateY(-3px);
+      box-shadow: 0 4px 26px #0bd4fb44;
+      z-index: 5;
+    }
+    .plan-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2rem 0 0 0;
+      gap: 1.1rem;
+      animation: fadeInUp 1s 0.14s both;
+    }
+    .plan-section img {
+      width: 320px;
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 1px 22px #2046;
+      background: #222641;
+      margin-bottom: 0.7rem;
+    }
+    .plan-caption {
+      color: #dbefff;
+      font-size: 1.04rem;
+      text-align: center;
+      max-width: 340px;
+      line-height: 1.5;
+      background: rgba(24,28,53,0.84);
+      border-radius: 9px;
+      padding: 12px 20px;
+    }
+    .features {
+      margin: 2rem auto 2.5rem auto;
+      max-width: 410px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 2px 14px #1127;
+      padding: 18px 28px;
+      color: #c6effb;
+      animation: fadeInUp 0.85s .24s both;
+    }
+    .features ul {
+      margin: 0;
+      padding: 8px 0 0 24px;
+      font-size: 1.05rem;
+      color: #f2ffff;
+    }
+    .features li {
+      margin-bottom: 4px;
+    }
+    .fast-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(22,30,45,0.74);
+      z-index: 1000;
+      display: none;
+    }
+    .fast-modal {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 6px 40px #0adff977;
+      padding: 32px 28px 28px 28px;
+      width: 92vw; max-width: 330px;
+      margin: 8vh auto;
+      animation: fadeInUp 0.45s;
+      position: relative;
+    }
+    .fast-modal-close {
+      position: absolute;
+      top: 15px; right: 17px;
+      cursor: pointer;
+      font-size: 1.35rem;
+      color: var(--accent);
+      background: none;
+      border: none;
+      padding: 3px 8px;
+      opacity: .85;
+      transition: opacity .14s;
+    }
+    .fast-modal-close:hover { opacity: 1;}
+    .feedback-btn,.open-feedback {
+      font-family: "Montserrat",sans-serif;
+      font-weight: bold;
+      font-size: 1.11rem;
+      letter-spacing: 0.09em;
+      padding: 13px 0;
+      background: linear-gradient(89deg, var(--accent), #63ffaa);
+      color: #181828;
+      border-radius: 13px;
+      border: none;
+      margin-top: 7px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px #14eafd55;
+      width: 100%;
+      transition: background 0.22s, box-shadow 0.17s;
+    }
+    .feedback-btn:hover,.open-feedback:hover {
+      background: linear-gradient(-89deg, #3ed3ff, var(--accent));
+      box-shadow: 0 4px 16px #18d7ff57;
+    }
+    .open-feedback {
+      margin: 0 auto 3rem auto;
+      max-width: 292px;
+      display: block;
+      text-align: center;
+    }
+    .feedback-form label {
+      display: block;
+      margin: 9px 0 12px 0;
+      color: #b5efff;
+      font-size: 1.01rem;
+    }
+    .feedback-form input[type="text"],
+    .feedback-form input[type="tel"] {
+      width: 100%;
+      padding: 13px 10px;
+      margin-top: 5px;
+      background: var(--input-bg);
+      border: none;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      color: var(--fg);
+      outline: none;
+      transition: box-shadow .17s;
+      box-shadow: 0 1px 7px #18cff833;
+      font-family: inherit;
+    }
+    .feedback-form input:focus {
+      box-shadow: 0 2px 16px #2cdeeaa4;
+    }
+    @media (max-width: 600px) {
+      .project-title { font-size:1.18rem;}
+      .project-desc { font-size:1rem;}
+      .features { padding: 15px 11px;}
+      .gallery-grid img, .plan-section img { height: 115px; }
+    }
+    /* Мини-анимация lazy (альтернатива AOS, для совместимости и скорости) */
+    [data-aos] { opacity:0; transform:translateY(30px);}
+    .aos-animate { opacity:1!important; transform:none!important; transition:opacity 0.6s, transform .65s;}
+    body,html { touch-action: manipulation; }
+  </style>
 </head>
 <body>
   <!-- Меню -->
   <nav>
-    <a href="index.html">Главная</a>
-    <a href="semeiny-40.html">Семейный 40</a>
-    <a href="minidom-36.html">МиниДом 36</a>
-    <a href="dom-kub-30.html">Дом Куб 30</a>
+    <a href="index.html" class="active">Меню</a>
     <a href="technology.html">Технологии</a>
   </nav>
 
@@ -26,24 +272,23 @@
     Большой светлый дом для семьи: просторная гостиная, три спальни, высокие потолки, уютная терраса и современная планировка. Дом, в который хочется возвращаться каждый день!
   </div>
 
-  <!-- Галерея -->
   <section class="gallery-section">
     <div class="gallery-title">Фотогалерея</div>
     <div class="gallery-grid">
-      <img src="https://i.postimg.cc/Wz2s1pkQ/photo-5467925983140117215-y-1.jpg" alt="Вид фасада Семейный 40">
-      <img src="https://i.postimg.cc/NjVGkw3H/photo-5467372104157624624-y.jpg" alt="Гостиная Семейный 40">
-      <img src="https://i.postimg.cc/7hmwGv1b/photo-5467925983140117216-y.jpg" alt="Интерьер дома Семейный 40">
-      <img src="https://i.postimg.cc/02kN8nGb/photo-5467372104157624620-y.jpg" alt="Кухня Семейный 40">
-      <img src="https://i.postimg.cc/rmG8TRK1/photo-5467925983140117214-y.jpg" alt="Терраса Семейный 40">
-      <img src="https://i.postimg.cc/qBXRVS3P/photo-5467372104157624619-y.jpg" alt="Обеденная зона Семейный 40">
-      <img src="https://i.postimg.cc/J0q4NH8r/photo-5467372104157624617-y.jpg" alt="Панорамные окна Семейный 40">
-      <img src="https://i.postimg.cc/NFYj27WC/photo-5467372104157624618-y.jpg" alt="Вход Семейный 40">
-      <img src="https://i.postimg.cc/X7sYX5xx/photo-5467372104157624621-y.jpg" alt="Спальня Семейный 40">
-      <img src="https://i.postimg.cc/dVDtC0xF/photo-5467372104157624622-y.jpg" alt="Лестница Семейный 40">
-      <img src="https://i.postimg.cc/Hx1pF9sW-/photo-5467452858132723456-y.jpg" alt="Ванная Семейный 40">
+      <img src="https://i.postimg.cc/Wz2s1pkQ/photo-5467925983140117215-y-1.jpg" alt="Вид фасада Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/NjVGkw3H/photo-5467372104157624624-y.jpg" alt="Гостиная Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/7hmwGv1b/photo-5467925983140117216-y.jpg" alt="Интерьер дома Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/02kN8nGb/photo-5467372104157624620-y.jpg" alt="Кухня Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/rmG8TRK1/photo-5467925983140117214-y.jpg" alt="Терраса Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/qBXRVS3P/photo-5467372104157624619-y.jpg" alt="Обеденная зона Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/J0q4NH8r/photo-5467372104157624617-y.jpg" alt="Панорамные окна Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/NFYj27WC/photo-5467372104157624618-y.jpg" alt="Вход Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/X7sYX5xx/photo-5467372104157624621-y.jpg" alt="Спальня Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/dVDtC0xF/photo-5467372104157624622-y.jpg" alt="Лестница Семейный 40" loading="lazy">
+      <img src="https://i.postimg.cc/Hx1pF9sW-/photo-5467452858132723456-y.jpg" alt="Ванная Семейный 40" loading="lazy">
     </div>
     <div class="plan-section">
-      <img src="https://i.postimg.cc/ZR6qqDDy/photo-5467372104157624616-y.jpg" alt="Планировка Семейный 40">
+      <img src="https://i.postimg.cc/ZR6qqDDy/photo-5467372104157624616-y.jpg" alt="Планировка Семейный 40" loading="lazy">
       <div class="plan-caption">
         Планировка: открытая гостиная, кухня, три спальни, ванная и терраса.<br>
         Просторное и светлое пространство для настоящей семьи.
@@ -62,39 +307,60 @@
     </ul>
   </section>
 
-  <!-- Форма обратной связи -->
-  <section class="feedback-section">
-    <h2>Заявка на проект</h2>
-    <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form">
-      <label>
-        Имя:
-        <input type="text" name="name" required placeholder="Ваше имя" />
-      </label>
-      <label>
-        Телефон:
-        <input type="tel" name="phone" required placeholder="Ваш телефон" pattern="[\d\+\-\s]+" />
-      </label>
-      <button type="submit" class="feedback-btn">Отправить заявку</button>
-    </form>
-  </section>
+  <!-- Кнопка для открытия формы -->
+  <button class="open-feedback" aria-label="Оставить заявку" id="openFeedbackBtn">
+    Оставить заявку
+  </button>
+
+  <!-- Модальная форма обратной связи -->
+  <div class="fast-modal-backdrop" id="feedbackModal">
+    <div class="fast-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+      <button class="fast-modal-close" id="closeFeedbackBtn" aria-label="Закрыть">×</button>
+      <h2 id="feedbackTitle" style="margin-bottom:10px;">Заявка на проект</h2>
+      <form action="https://getform.io/f/bmdmvjya" method="POST" class="feedback-form" autocomplete="on">
+        <label>
+          Имя:
+          <input type="text" name="name" required placeholder="Ваше имя" autocomplete="name"/>
+        </label>
+        <label>
+          Телефон:
+          <input type="tel" name="phone" required placeholder="Ваш телефон" pattern="[\d\+\-\s]+" autocomplete="tel"/>
+        </label>
+        <button type="submit" class="feedback-btn">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Кнопка ассистента -->
-  <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом">
+  <button class="sergey-fab-rect" onclick="window.chatbase.openChat()" aria-label="Чат с Сергеем Прорабом" style="position:fixed;bottom:24px;right:30px;z-index:100;">
     <span class="icon">👷</span>
     <span class="label">Сергей Прораб</span>
   </button>
-<!-- Скрипты (AOS, Chatbase, app.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- JS-модалка и ассистент -->
   <script>
-    if (window.AOS && typeof AOS.init === "function") {
-      AOS.init({ once: true, duration: 700, offset: 60 });
+    // Плавное появление блоков (pseudo-AOS)
+    function lazyAnimate() {
+      document.querySelectorAll('[data-aos]').forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight-100){el.classList.add('aos-animate');}
+      });
     }
-  </script>
-  <script>
-    window.chatbase = window.chatbase || {};
-    window.chatbase.config = { chatbotId: "elEbjas8v3UayyJoEx6Fq" };
+    window.addEventListener('scroll', lazyAnimate);
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(lazyAnimate, 400);
+    });
+
+    // Модальное окно обратной связи
+    const openBtn=document.getElementById('openFeedbackBtn'),
+          modal=document.getElementById('feedbackModal'),
+          closeBtn=document.getElementById('closeFeedbackBtn');
+    openBtn.onclick = ()=>{modal.style.display="block";setTimeout(()=>{modal.querySelector('.fast-modal').classList.add('aos-animate');},10);}
+    closeBtn.onclick = ()=>{modal.style.display="none";modal.querySelector('.fast-modal').classList.remove('aos-animate');}
+    window.onclick = e=>{ if(e.target===modal){modal.style.display="none";modal.querySelector('.fast-modal').classList.remove('aos-animate');} };
+
+    // Chatbase ассистент
+    window.chatbase=window.chatbase||{}; window.chatbase.config={chatbotId:"elEbjas8v3UayyJoEx6Fq"};
   </script>
   <script src="https://www.chatbase.co/embed.min.js" id="chatbase-script" defer></script>
-  <script src="app.js"></script>
 </body>
 </html>
