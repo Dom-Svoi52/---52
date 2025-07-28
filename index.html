@@ -2,536 +2,180 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Свой дом НН | Современные каркасные дома</title>
   <meta name="description" content="Свой дом НН — современные энергоэффективные каркасные дома. Калькулятор стоимости, проекты, экспертная консультация, заявка онлайн.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- переменные шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ---------- CSS-переменные (тёмная/светлая тема) ---------- */
+    :root{
+      --accent:#FF6F61;--accent-dark:#e55a4f;
+      --bg:#1a252f;--bg-alt:#2c3e50;
+      --text:#ecf0f1;--text-alt:#bfd6ee;
+      --success:#6EFFB7
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#ffffff;--bg-alt:#f2f5f9;--text:#1a252f;--text-alt:#475569}
+      body{color-scheme:light dark}
     }
 
-    body {
-      font-family: 'Roboto', sans-serif;
-      line-height: 1.6;
-      color: #2c3e50;
-      background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
-      min-height: 100vh;
+    /* базовые стили */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto Flex',sans-serif;line-height:1.6;
+         background:linear-gradient(135deg,var(--bg) 0%,var(--bg-alt) 100%);
+         color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%;height:auto}
+
+    /* навигация */
+    nav{position:fixed;top:0;left:0;width:100%;
+        background:rgba(26,37,47,.95);padding:15px 0;z-index:1000;
+        backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.3);
+        display:flex;justify-content:center;gap:20px}
+    nav a{color:var(--text);text-decoration:none;font-weight:500;position:relative;transition:color .3s}
+    nav a:hover,nav a.active{color:var(--accent)}
+    nav a.active::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:var(--accent)}
+
+    /* hero */
+    .hero-video-wrap{position:relative;min-height:70vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .hero-bg-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);z-index:-1}
+    .hero-content{text-align:center;color:#fff;z-index:2;background:rgba(26,37,47,.12);padding:40px 20px;border-radius:15px;backdrop-filter:blur(6px)}
+    .hero-content h1{font-family:'Montserrat',sans-serif;font-size:3rem;font-weight:700;margin-bottom:20px;text-shadow:2px 2px 4px rgba(0,0,0,.5)}
+    .hero-content span{color:var(--accent)}
+    .hero-content p{font-size:1.2rem;max-width:400px;margin:0 auto;opacity:.9}
+
+    /* проекты */
+    .projects-section{padding:80px 20px;max-width:1200px;margin:0 auto}
+    .projects-section h2{text-align:center;font-size:2.5rem;margin-bottom:50px;color:var(--text);font-family:'Montserrat',sans-serif}
+    .projects-cards{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+    .card{background:rgba(44,62,80,.8);border-radius:15px;overflow:hidden;transition:.3s backdrop-filter,.3s box-shadow,.3s transform;
+          border:1px solid rgba(255,255,255,.1);opacity:0;transform:translateY(25px)}
+    .card img{width:100%;height:200px;object-fit:cover}
+    .card-content{padding:25px;color:var(--text)}
+    .card-content h3{font-size:1.5rem;margin-bottom:15px;color:var(--accent);font-family:'Montserrat',sans-serif}
+    .card-content p{margin-bottom:20px;opacity:.9;line-height:1.6}
+    .card-content a{display:inline-block;background:var(--accent);color:#fff;padding:10px 20px;text-decoration:none;border-radius:25px;font-weight:500;transition:background .3s}
+    .card-content a:hover{background:var(--accent-dark)}
+
+    /* анимация появления карточек (с поддержкой) */
+    @supports (animation-timeline:view()){
+      .card{animation:fadeSlide .8s forwards;animation-timeline:view()}
+      @keyframes fadeSlide{to{opacity:1;transform:none}}
+    }
+    @supports not (animation-timeline:view()){
+      .card{opacity:1;transform:none}
     }
 
-    /* Навигация */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(26, 37, 47, 0.95);
-      padding: 15px 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    /* калькулятор */
+    .calc-section{max-width:650px;margin:60px auto;padding:0 20px}
+    .calc-section h2{text-align:center;font-size:1.9rem;margin-bottom:15px;color:var(--accent);font-family:'Montserrat',sans-serif}
+    .calc-description{text-align:center;font-size:1rem;max-width:430px;margin:0 auto 25px;color:var(--text-alt);opacity:.9}
+    .calc-form{background:rgba(44,62,80,.9);border-radius:20px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.1)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+    .form-group{display:flex;flex-direction:column}
+    .form-group.full-width{grid-column:1/-1}
+    .calc-form label{color:var(--text);font-weight:500;margin-bottom:8px;font-size:.95rem}
+    .calc-form input,.calc-form select{padding:12px 15px;border:2px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.05);color:var(--text);font-size:1rem;transition:border-color .3s,background .3s}
+    .calc-form input:focus,.calc-form select:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,.1)}
+    .calc-form option{background:var(--bg-alt);color:var(--text)}
+    .calc-btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:15px;border-radius:12px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:transform .3s,box-shadow .3s;margin-top:10px}
+    .calc-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(255,111,97,.4)}
+    .calc-result{margin-top:25px;padding:25px;background:rgba(44,62,80,.6);border-radius:15px;text-align:center;display:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}
+    .price-display{font-size:2rem;color:var(--accent);font-weight:700;margin:15px 0;font-family:'Montserrat',sans-serif}
+    .price-breakdown{margin-top:20px;text-align:left;color:var(--text-alt)}
+    .price-breakdown div{display:flex;justify-content:space-between;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .economy-bonus{color:var(--success);font-weight:600;font-size:1.1rem;margin-top:15px}
+
+    /* форма обратной связи */
+    .feedback-section{max-width:500px;margin:60px auto;padding:0 20px}
+    .feedback-section h2{text-align:center;font-size:2rem;margin-bottom:30px;color:var(--text);font-family:'Montserrat',sans-serif}
+    .feedback-form{background:rgba(44,62,80,.9);padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.1)}
+    .feedback-form label{display:block;color:var(--text);font-weight:500;margin-bottom:8px}
+    .feedback-form input{width:100%;padding:12px 15px;margin-bottom:20px;border:2px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.05);color:var(--text);font-size:1rem;transition:border-color .3s}
+    .feedback-form input:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,.1)}
+    .feedback-btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:15px;border-radius:12px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:transform .3s,box-shadow .3s}
+    .feedback-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(255,111,97,.4)}
+    .success-message,.error-message{padding:15px;border-radius:10px;margin-top:20px;text-align:center;font-weight:500}
+    .success-message{background:rgba(110,255,183,.2);color:var(--success);border:1px solid var(--success)}
+    .error-message{background:rgba(255,111,97,.2);color:var(--accent);border:1px solid var(--accent)}
+
+    /* кнопка чат-бота */
+    .sergey-fab-rect{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:15px 20px;border-radius:25px;cursor:pointer;box-shadow:0 5px 20px rgba(255,111,97,.4);transition:transform .3s,box-shadow .3s;display:flex;align-items:center;gap:10px;font-weight:600;z-index:1000}
+    .sergey-fab-rect:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,111,97,.6)}
+    .sergey-fab-rect svg{width:20px;height:20px;fill:currentColor}
+
+    /* адаптивность */
+    @media (max-width:768px){
+      .hero-content h1{font-size:2.2rem}.hero-content p{font-size:1rem}
+      .form-row{grid-template-columns:1fr;gap:15px}
+      .projects-cards{grid-template-columns:1fr}
+      nav a{font-size:.9rem}
+      .sergey-fab-rect{bottom:20px;right:20px;padding:12px 16px}.sergey-fab-rect .label{display:none}
     }
-
-    nav a {
-      color: #ecf0f1;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    nav a:hover, nav a.active {
-      color: #FF6F61;
-    }
-
-    nav a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #FF6F61;
-    }
-
-    /* Hero секция */
-    .hero-video-wrap {
-      position: relative;
-      width: 100%;
-      min-height: 70vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-bg-video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-    }
-
-    .hero-content {
-      text-align: center;
-      color: white;
-      z-index: 2;
-      background: rgba(26,37,47,0.12);
-      padding: 40px 20px;
-      border-radius: 15px;
-      backdrop-filter: blur(5px);
-    }
-
-    .hero-content h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      max-width: 400px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    /* Проекты */
-    .projects-section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .projects-section h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 50px;
-      color: #ecf0f1;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .projects-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: rgba(44, 62, 80, 0.8);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 25px;
-      color: #ecf0f1;
-    }
-
-    .card-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: #FF6F61;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .card-content p {
-      margin-bottom: 20px;
-      opacity: 0.9;
-      line-height: 1.6;
-    }
-
-    .card-content a {
-      display: inline-block;
-      background: #FF6F61;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 25px;
-      transition: background 0.3s ease;
-      font-weight: 500;
-    }
-.card-content a:hover {
-      background: #e55a4f;
-    }
-
-    /* Калькулятор */
-    .calc-section {
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    .calc-section h2 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #FF6F61;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .calc-description {
-      text-align: center;
-      font-size: 1rem;
-      max-width: 400px;
-      margin: 0 auto 25px auto;
-      color: #bfd6ee;
-      opacity: 0.9;
-    }
-
-    .calc-form {
-      background: rgba(44, 62, 80, 0.9);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .calc-form label {
-      color: #ecf0f1;
-      font-weight: 500;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
-
-    .calc-form input,
-    .calc-form select {
-      padding: 12px 15px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #ecf0f1;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, background 0.3s ease;
-    }
-
-    .calc-form input:focus,
-    .calc-form select:focus {
-      outline: none;
-      border-color: #FF6F61;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .calc-form option {
-      background: #2c3e50;
-      color: #ecf0f1;
-    }
-
-    .calc-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #FF6F61, #e55a4f);
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-top: 10px;
-    }
-
-    .calc-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.4);
-    }
-
-    .calc-result {
-      margin-top: 25px;
-      padding: 25px;
-      background: rgba(44, 62, 80, 0.6);
-      border-radius: 15px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .price-display {
-      font-size: 2rem;
-      color: #FF6F61;
-      font-weight: 700;
-      margin: 15px 0;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .price-breakdown {
-      margin-top: 20px;
-      text-align: left;
-      color: #bfd6ee;
-    }
-
-    .price-breakdown div {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .economy-bonus {
-      color: #6EFFB7;
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-top: 15px;
-    }
-
-    /* Форма обратной связи */
-    .feedback-section {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    .feedback-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 30px;
-      color: #ecf0f1;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .feedback-form {
-      background: rgba(44, 62, 80, 0.9);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .feedback-form label {
-      display: block;
-      color: #ecf0f1;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .feedback-form input {
-      width: 100%;
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #ecf0f1;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-.feedback-form input:focus {
-      outline: none;
-      border-color: #FF6F61;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .feedback-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #FF6F61, #e55a4f);
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .feedback-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.4);
-    }
-
-    .success-message, .error-message {
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .success-message {
-      background: rgba(110, 255, 183, 0.2);
-      color: #6EFFB7;
-      border: 1px solid #6EFFB7;
-    }
-
-    .error-message {
-      background: rgba(255, 111, 97, 0.2);
-      color: #FF6F61;
-      border: 1px solid #FF6F61;
-    }
-
-    /* Кнопка помощника */
-    .sergey-fab-rect {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: linear-gradient(135deg, #FF6F61, #e55a4f);
-      color: white;
-      border: none;
-      padding: 15px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 5px 20px rgba(255, 111, 97, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-      z-index: 1000;
-    }
-
-    .sergey-fab-rect:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(255, 111, 97, 0.6);
-    }
-
-    .sergey-fab-rect .icon {
-      font-size: 1.2rem;
-    }
-
-    /* Адаптивность */
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      
-      .hero-content p {
-        font-size: 1rem;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      .projects-cards {
-        grid-template-columns: 1fr;
-      }
-
-      nav a {
-        margin: 0 10px;
-        font-size: 0.9rem;
-      }
-
-      .sergey-fab-rect {
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 16px;
-      }
-
-      .sergey-fab-rect .label {
-        display: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .calc-section, .feedback-section {
-        padding: 0 15px;
-      }
-
-      .calc-form, .feedback-form {
-        padding: 20px;
-      }
+    @media (max-width:480px){
+      .calc-section,.feedback-section{padding:0 15px}
+      .calc-form,.feedback-form{padding:20px}
     }
   </style>
 </head>
 <body>
-  <!-- Меню -->
-  <nav>
+  <!-- меню -->
+  <nav role="navigation">
     <a href="index.html" class="active">Главная</a>
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <!-- Hero-видео-блок -->
+  <!-- hero-видео -->
   <section class="hero-video-wrap">
-    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto">
+    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="https://i.postimg.cc/j5ZcMpJH/hero-poster.webp">
       <source src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1" type="video/mp4">
     </video>
     <div class="hero-content">
-      <h1>Свой дом <span style="color:#FF6F61;">НН</span></h1>
-      <p>Тёплые каркасные дома<br> с перекрёстным утеплением</p>
+      <h1>Свой дом <span>НН</span></h1>
+      <p>Тёплые каркасные дома<br>с перекрёстным утеплением</p>
     </div>
   </section>
 
-  <!-- Блок проектов -->
+  <!-- проекты -->
   <section class="projects-section">
     <h2>Наши проекты</h2>
     <div class="projects-cards">
       <div class="card">
-        <img src="https://i.postimg.cc/1zqmWjSY/photo-5467372104157624625-x.jpg" alt="Семейный 40">
+        <img src="https://i.postimg.cc/1zqmWjSY/photo-5467372104157624625-x.jpg" alt="Семейный 40" loading="lazy">
         <div class="card-content">
           <h3>Семейный 40</h3>
           <p>Большой семейный дом с террасой, три спальни, свободная планировка. Комфорт для всей семьи.</p>
-          <a href="semeiny-40.html">Подробнее</a>
+          <a href="semeiny-40.html" rel="noopener">Подробнее</a>
         </div>
       </div>
       <div class="card">
-        <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424526_y.jpg?raw=true" alt="МиниДом 36">
+        <img src="https://github.com/domdom610/Svoy-Dom/blob/main/images/photo_5443140577278424526_y.jpg?raw=true" alt="МиниДом 36" loading="lazy">
         <div class="card-content">
-<h3>МиниДом 36</h3>
+          <h3>МиниДом 36</h3>
           <p>Компактный и светлый, для семьи или дачи. Панорамные окна, тёплый фасад, терраса.</p>
-          <a href="minidom-36.html">Подробнее</a>
+          <a href="minidom-36.html" rel="noopener">Подробнее</a>
         </div>
       </div>
       <div class="card">
-        <img src="https://i.postimg.cc/htSQ5xtq/photo-5467925983140117240-y.jpg" alt="Дом Куб 30">
+        <img src="https://i.postimg.cc/htSQ5xtq/photo-5467925983140117240-y.jpg" alt="Дом Куб 30" loading="lazy">
         <div class="card-content">
           <h3>Дом Куб 30</h3>
-          <p>Минималистичный дом-куб. Макс. света и уюта. Для творческих людей, современный вид.</p>
-          <a href="dom-kub-30.html">Подробнее</a>
+          <p>Минималистичный дом-куб. Максимум света и уюта. Для творческих людей, современный вид.</p>
+          <a href="dom-kub-30.html" rel="noopener">Подробнее</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Улучшенный калькулятор -->
+  <!-- калькулятор -->
   <section class="calc-section">
     <h2>Индивидуальный расчёт для вашего будущего дома</h2>
-    <div class="calc-description">
-      Выберите параметры и получите детальный расчёт стоимости с учётом всех особенностей!
-    </div>
-    
+    <div class="calc-description">Выберите параметры и получите детальный расчёт стоимости с учётом всех особенностей!</div>
+
     <div class="calc-form">
       <div class="form-row">
         <div class="form-group">
@@ -546,7 +190,7 @@
           </select>
         </div>
       </div>
-      
+
       <div class="form-row">
         <div class="form-group">
           <label>Тип фундамента:</label>
@@ -563,7 +207,7 @@
           </select>
         </div>
       </div>
-      
+
       <div class="form-group full-width">
         <label>Перекрёстное утепление:</label>
         <select id="cross">
@@ -571,204 +215,116 @@
           <option value="no">Нет</option>
         </select>
       </div>
-      
-      <button type="button" onclick="calcHome()" class="calc-btn">
-        Рассчитать стоимость дома
-      </button>
+
+      <button type="button" onclick="calcHome()" class="calc-btn">Рассчитать стоимость дома</button>
     </div>
-    
-    <div id="calc-result" class="calc-result" style="display: none;"></div>
+
+    <div id="calc-result" class="calc-result" aria-live="polite"></div>
   </section>
 
-  <!-- Улучшенная форма обратной связи -->
+  <!-- форма обратной связи -->
   <section class="feedback-section">
     <h2>Оставить заявку</h2>
-    <form id="feedback-form" class="feedback-form">
-      <label>
-        Имя:
-        <input type="text" name="name" id="name" required placeholder="Ваше имя" />
+    <form id="feedback-form" class="feedback-form" novalidate>
+      <label>Имя:
+        <input type="text" name="name" id="name" required minlength="2" placeholder="Ваше имя">
       </label>
-      <label>
-        Телефон:
-        <input type="tel" name="phone" id="phone" required placeholder="+7 (_) _--" />
+      <label>Телефон:
+        <input type="tel" name="phone" id="phone" required placeholder="+7 (___) ___-__-__">
       </label>
       <button type="submit" class="feedback-btn">Отправить заявку</button>
     </form>
-    <div id="form-message"></div>
+    <div id="form-message" aria-live="polite"></div>
   </section>
 
-  <!-- Кнопка ассистента -->
-  <button class="sergey-fab-rect" onclick="openSergeyChat()" aria-label="Чат с Сергеем Прорабом">
-    <span class="icon">👷</span>
+  <!-- кнопка чат-бота -->
+  <button class="sergey-fab-rect" onclick="openSergeyChat()" aria-label="Чат с Сергеем-прорабом">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.486 3 2 6.94 2 11.5c0 2.272 1.127 4.313 2.962 5.865L4 22l4.278-2.138A11.86 11.86 0 0 0 12 21c5.514 0 10-3.94 10-8.5S17.514 3 12 3z"/></svg>
     <span class="label">Сергей Прораб</span>
   </button>
 
-  <!-- Скрипты -->
+  <!-- ---------- скрипты ---------- -->
   <script>
-    // Улучшенный калькулятор
-    function calcHome() {
-      const area = Number(document.getElementById('area').value || 0);
-      const floors = Number(document.getElementById('floors').value || 1);
+    /* калькулятор */
+    function calcHome(){
+      const area   = +document.getElementById('area').value || 0;
+      const floors = +document.getElementById('floors').value || 1;
       const foundation = document.getElementById('foundation').value;
-      const complex = document.getElementById('complex').value;
-      const cross = document.getElementById('cross').value === "yes";
-      
-      const resultDiv = document.getElementById('calc-result');
-      
-      if (!area || area < 20) {
-        resultDiv.innerHTML = "<span style='color:#FF6F61;'>Пожалуйста, введите площадь дома от 20 м²!</span>";
-resultDiv.style.display = 'block';
+      const complex    = document.getElementById('complex').value;
+      const cross      = document.getElementById('cross').value === 'yes';
+      const resultDiv  = document.getElementById('calc-result');
+
+      if(area < 20){
+        resultDiv.innerHTML = '<span style="color:var(--accent);">Пожалуйста, введите площадь дома от 20 м²!</span>';
+        resultDiv.style.display = 'block';
         return;
       }
-      
-      // Базовая стоимость за м²
-      let basePrice = 27000;
-      
-      // Расчёт компонентов
-      const components = {
-        base: area * floors * basePrice,
-        complex: complex === "podkluch" ? area * floors * 18500 : 0,
-        foundation: foundation === "plita" ? area * floors * 3000 : 0,
-        cross: 0
+
+      const basePrice = 27000;
+      const comp = {
+        base       : area * floors * basePrice,
+        complex    : complex==='podkluch' ? area * floors * 18500 : 0,
+        foundation : foundation==='plita' ? area * floors * 3000  : 0,
+        cross      : 0
       };
-      
-      let subtotal = components.base + components.complex + components.foundation;
-      
-      if (cross) {
-        components.cross = subtotal * 0.11;
-        subtotal += components.cross;
-      }
-      
-      // Формирование результата
-      let breakdown = 
-        <div class="price-breakdown">
-          <div><span>Базовая стоимость (${area} м² × ${floors} эт.):</span><span>${components.base.toLocaleString()} ₽</span></div>
-      ;
-      
-      if (components.complex > 0) {
-        breakdown += <div><span>Комплектация "Под ключ":</span><span>+${components.complex.toLocaleString()} ₽</span></div>;
-      }
-      
-      if (components.foundation > 0) {
-        breakdown += <div><span>Плитный фундамент:</span><span>+${components.foundation.toLocaleString()} ₽</span></div>;
-      }
-      
-      if (components.cross > 0) {
-        breakdown += <div><span>Перекрёстное утепление:</span><span>+${components.cross.toLocaleString()} ₽</span></div>;
-      }
-      
-      breakdown += </div>;
-      
-      const economyText = cross ? <div class="economy-bonus">💰 Экономия на отоплении до 25% в год!</div> : '';
-      
-      resultDiv.innerHTML = 
-        <div><strong>Итоговая стоимость:</strong></div>
-        <div class="price-display">${Math.round(subtotal).toLocaleString()} ₽</div>
-        ${breakdown}
-        ${economyText}
-        <div style="font-size:0.9rem;color:#afcce7;margin-top:15px;">
-          *Расчёт является предварительным. Для точной стоимости заполните заявку ниже
-        </div>
-      ;
-      
-      resultDiv.style.display = 'block';
+      let subtotal = comp.base + comp.complex + comp.foundation;
+      if(cross){comp.cross = subtotal * .11; subtotal += comp.cross;}
+
+      let breakdown =
+        `<div class="price-breakdown">
+           <div><span>Базовая стоимость (${area} м² × ${floors} эт.):</span><span>${comp.base.toLocaleString()} ₽</span></div>`;
+      if(comp.complex)    breakdown += `<div><span>Комплектация «Под ключ»:</span><span>+${comp.complex.toLocaleString()} ₽</span></div>`;
+      if(comp.foundation) breakdown += `<div><span>Плитный фундамент:</span><span>+${comp.foundation.toLocaleString()} ₽</span></div>`;
+      if(comp.cross)      breakdown += `<div><span>Перекрёстное утепление:</span><span>+${comp.cross.toLocaleString()} ₽</span></div>`;
+      breakdown += `</div>`;
+
+      const economy = cross ? `<div class="economy-bonus">Экономия на отоплении до 25 % в год!</div>` : '';
+
+      resultDiv.innerHTML =
+        `<div><strong>Итоговая стоимость:</strong></div>
+         <div class="price-display">${Math.round(subtotal).toLocaleString()} ₽</div>
+         ${breakdown}${economy}
+         <div style="font-size:.9rem;color:var(--text-alt);margin-top:15px;">*Расчёт предварительный. Для точной сметы заполните заявку ниже.</div>`;
+      resultDiv.style.display='block';
     }
 
-    // Улучшенная обработка формы
-    document.getElementById('feedback-form').addEventListener('submit', function(e) {
+    /* маска телефона */
+    document.getElementById('phone').addEventListener('input',e=>{
+      let v=e.target.value.replace(/\D/g,''); if(v.startsWith('8')) v='7'+v.slice(1);
+      let r='+7'; if(v.length>1) r+=' ('+v.slice(1,4);
+      if(v.length>=5) r+=') '+v.slice(4,7);
+      if(v.length>=8) r+='-'+v.slice(7,9);
+      if(v.length>=10)r+='-'+v.slice(9,11);
+      e.target.value=r;
+    });
+
+    /* отправка формы (демо) */
+    document.getElementById('feedback-form').addEventListener('submit',function(e){
       e.preventDefault();
-      
-      const formData = new FormData(this);
-      const name = formData.get('name').trim();
-      const phone = formData.get('phone').trim();
-      const messageDiv = document.getElementById('form-message');
-      
-      // Валидация
-      if (!name || name.length < 2) {
-        showMessage('Пожалуйста, введите корректное имя', 'error');
-        return;
-      }
-      
-      if (!phone || phone.length < 10) {
-        showMessage('Пожалуйста, введите корректный номер телефона', 'error');
-        return;
-      }
-      
-      // Симуляция отправки
-      const submitBtn = this.querySelector('.feedback-btn');
-      submitBtn.textContent = 'Отправляем...';
-      submitBtn.disabled = true;
-      
-      // Имитация отправки на сервер
-      setTimeout(() => {
-        // В реальном проекте здесь должен быть запрос к вашему серверу
-        showMessage('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'success');
-        this.reset();
-        submitBtn.textContent = 'Отправить заявку';
-        submitBtn.disabled = false;
-      }, 1500);
+      const {name,phone}=this;
+      if(name.value.trim().length<2){showMsg('Пожалуйста, введите корректное имя','error');return}
+      if(phone.value.trim().length<10){showMsg('Пожалуйста, введите корректный номер телефона','error');return}
+      const btn=this.querySelector('.feedback-btn');btn.textContent='Отправляем...';btn.disabled=true;
+      setTimeout(()=>{showMsg('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.','success');
+                      this.reset();btn.textContent='Отправить заявку';btn.disabled=false;},1500);
     });
-    
-    function showMessage(text, type) {
-      const messageDiv = document.getElementById('form-message');
-      messageDiv.innerHTML = <div class="${type}-message">${text}</div>;
-      
-      if (type === 'success') {
-        setTimeout(() => {
-          messageDiv.innerHTML = '';
-        }, 5000);
-      }
+    function showMsg(text,type){
+      const box=document.getElementById('form-message');
+      box.innerHTML=`<div class="${type}-message">${text}</div>`;
+      if(type==='success') setTimeout(()=>box.innerHTML='',5000);
     }
 
-    // Маска для телефона
-    document.getElementById('phone').addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      let formattedValue = '';
-      
-      if (value.startsWith('8')) {
-        value = '7' + value.substring(1);
-}
-      
-      if (value.startsWith('7')) {
-        formattedValue = '+7';
-        if (value.length > 1) {
-          formattedValue += ' (' + value.substring(1, 4);
-        }
-        if (value.length >= 5) {
-          formattedValue += ') ' + value.substring(4, 7);
-        }
-        if (value.length >= 8) {
-          formattedValue += '-' + value.substring(7, 9);
-        }
-        if (value.length >= 10) {
-          formattedValue += '-' + value.substring(9, 11);
-        }
-      } else if (value.length > 0) {
-        formattedValue = '+' + value;
-      }
-      
-      e.target.value = formattedValue;
-    });
-
-    // Чат-бот
-    function openSergeyChat() {
-      if (window.chatbase && typeof window.chatbase.openChat === 'function') {
-        window.chatbase.openChat();
-      } else {
-        alert("Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите немного...");
-      }
+    /* чат-бот */
+    function openSergeyChat(){
+      if(window.chatbase&&typeof window.chatbase.openChat==='function'){window.chatbase.openChat();}
+      else{alert('Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите немного...');}
     }
 
-    // Плавная прокрутка для навигации
-    document.addEventListener('DOMContentLoaded', function() {
-      // Добавляем отступ сверху для контента из-за фиксированной навигации
-      document.body.style.paddingTop = '70px';
-    });
+    /* отступ для фикс-меню */
+    document.addEventListener('DOMContentLoaded',()=>{document.body.style.paddingTop='70px'});
   </script>
 
-  <!-- Скрипт Chatbase -->
-  <script>
-    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="elEbjas8v3UayyJoEx6Fq";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-  </script>
+  <!-- Chatbase -->
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="elEbjas8v3UayyJoEx6Fq" defer></script>
 </body>
-</html>}
+</html>
