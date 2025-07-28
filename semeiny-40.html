@@ -9,338 +9,152 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap">
   <link rel="icon" type="image/png" href="https://i.postimg.cc/dtdMVQBt/5b4c9b6e-9b7d-43b3-b257-39722a15280c.png">
   <style>
-    :root {
-      --bg: #181828;
-      --fg: #fff;
-      --accent: #5ddff9;
-      --menu-bg: rgba(30,34,54,0.97);
-      --card-bg: rgba(32,38,62, 0.93);
-      --input-bg: #222641;
-      --transition: 0.35s cubic-bezier(.4,.9,.5,1.2);
-      --fab-hover: #63ffaa;
+    :root{
+      --accent:#5ddff9;
+      --accent-dark:#3ed3ff;
+      --bg:#181828;
+      --card-bg:rgba(32,38,62,0.93);
+      --input-bg:#222641;
+      --text:#fff;
+      --text-alt:#dafaff;
+      --transition:0.33s cubic-bezier(.4,.9,.5,1.2);
     }
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: "Roboto", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
+    html,body{margin:0;padding:0;min-height:100vh;font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    *{box-sizing:border-box}
+
+    nav{
+      display:flex;gap:1.5rem;
+      justify-content:flex-start;align-items:center;
+      padding:18px 4vw 10px 4vw;
+      background:rgba(30,34,54,0.97);box-shadow:0 2px 8px 0 rgba(25,32,41,0.08);
+      border-bottom:2px solid rgba(93,223,249,0.08);position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(6px);
     }
-    nav {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 18px 4vw 10px 4vw;
-      background: var(--menu-bg);
-      box-shadow: 0 2px 8px 0 rgba(25,32,41,0.08);
-      backdrop-filter: blur(6px);
-      border-bottom: 2px solid rgba(93,223,249,0.08);
-      position: sticky;
-      top: 0; left: 0; right: 0;
-      z-index: 20;
+    nav a{
+      font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:700;text-decoration:none;text-transform:uppercase;
+      color:var(--text);padding:10px 20px;border-radius:22px;transition:background var(--transition),color var(--transition);letter-spacing:1.1px;
     }
-    nav a {
-      font-family: "Montserrat", sans-serif;
-      font-size: 1.02rem;
-      font-weight: 700;
-      text-decoration: none;
-      text-transform: uppercase;
-      color: var(--fg);
-      background: none;
-      border: none;
-      padding: 9px 18px;
-      border-radius: 22px;
-      transition: background var(--transition), color var(--transition);
-      letter-spacing: 1.1px;
+    nav a:hover,nav a.active{background:var(--accent);color:var(--bg);}
+
+    .project-title{
+      font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:800;margin:2.7rem 0 1rem 0;text-align:center;letter-spacing:1.2px;color:var(--accent);text-shadow:0 2px 16px #2227;
     }
-    nav a:hover, nav a.active {
-      background: var(--accent);
-      color: var(--bg);
+    .project-desc{
+      font-size:1.16rem;text-align:center;color:#e6fcfe;max-width:510px;margin:0 auto 2rem auto;line-height:1.55;
     }
-    .project-title {
-      font-family: "Montserrat", sans-serif;
-      font-size: 2.1rem;
-      font-weight: bold;
-      margin: 3rem 0 1rem 0;
-      text-align: center;
-      letter-spacing: 1.2px;
-      color: var(--accent);
-      text-shadow: 0 2px 12px #2226;
-      animation: fadeInUp 0.8s;
+
+    /* ГАЛЕРЕЯ */
+    .gallery-section{
+      margin:2rem 0 1.5rem 0;padding:0 4vw;
     }
-    @keyframes fadeInUp {
-      0% {opacity:0;transform:translateY(25px);}
-      100% {opacity:1;transform:translateY(0);}
+    .gallery-title{
+      font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:1rem;color:var(--text);
+      letter-spacing:0.04em;text-align:left;
     }
-    .project-desc {
-      font-size: 1.18rem;
-      text-align: center;
-      color: #e6fcfe;
-      max-width: 560px;
-      margin: 0 auto 2rem auto;
-      line-height: 1.55;
-      animation: fadeInUp 0.85s 0.04s both;
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+      gap:22px;
+      margin-bottom:2.45rem;
+      align-items:stretch;
     }
-    .gallery-section {
-      margin: 2rem 0 1rem 0;
-      padding: 0 4vw;
-      animation: fadeInUp 0.8s 0.08s both;
+    .gallery-grid img{
+      width:100%;
+      height:400px;
+      object-fit:cover;
+      object-position:center center;
+      border-radius:19px;
+      box-shadow:0 8px 34px #29297629,0 2px 8px #1aeafd23;
+      transition:transform .28s cubic-bezier(.5,1.3,.5,1),box-shadow .19s;
+      cursor:pointer;
+      background:#202432;
+      filter:saturate(1.07) brightness(1.08);
+      will-change:transform;
+      display:block;
     }
-    .gallery-title {
-      font-family: "Montserrat",sans-serif;
-      font-weight: 700;
-      font-size: 1.28rem;
-      margin-bottom: 1rem;
-      color: var(--fg);
-      letter-spacing: 0.04em;
+    .gallery-grid img:hover{
+      transform:scale(1.06) translateY(-8px);
+      box-shadow:0 8px 42px #0bd4fb46;
+      z-index:10;
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-bottom: 2rem;
+
+    /* Планировка */
+    .plan-section{
+      display:flex;flex-direction:column;align-items:center;margin:2.5rem 0 0 0;gap:1.25rem;
     }
-    .gallery-grid img {
-      width: 100%;
-      height: 500px;
-      object-fit: cover;
-      border-radius: 14px;
-      box-shadow: 0 2px 18px #1114;
-      transition: transform .28s cubic-bezier(.5,1.3,.5,1),box-shadow .18s;
-      will-change: transform;
-      cursor: pointer;
-      background: #202432;
-      filter: saturate(1.06) brightness(1.05);
+    .plan-section img{
+      width:410px;max-width:100%;height:315px;object-fit:cover;object-position:center;border-radius:14px;box-shadow:0 5px 34px #2056;
+      background:#222641;margin-bottom:0.7rem;
     }
-    .gallery-grid img:hover {
-      transform: scale(1.06) translateY(-3px);
-      box-shadow: 0 4px 26px #0bd4fb44;
-      z-index: 5;
+    .plan-caption{
+      color:#dbefff;font-size:1.1rem;text-align:center;max-width:420px;line-height:1.52;background:rgba(24,28,53,0.84);border-radius:11px;padding:13px 23px;
     }
-    .plan-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 2rem 0 0 0;
-      gap: 1.1rem;
-      animation: fadeInUp 1s 0.14s both;
+
+    /* Преимущества */
+    .features{
+      margin:2.6rem auto 2.8rem auto;max-width:420px;background:var(--card-bg);border-radius:16px;box-shadow:0 2px 18px #1126;
+      padding:20px 30px;color:#c6effb;
     }
-    .plan-section img {
-      width: 320px;
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 1px 22px #2046;
-      background: #222641;
-      margin-bottom: 0.7rem;
+    .features ul{margin:0;padding:10px 0 0 24px;font-size:1.05rem;color:#f2ffff;}
+    .features li{margin-bottom:4px;}
+
+    .open-feedback, .feedback-btn{
+      font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.09rem;letter-spacing:0.07em;
+      padding:13px 0;background:linear-gradient(89deg,var(--accent),#63ffaa);color:#181828;border-radius:13px;border:none;margin-top:9px;cursor:pointer;box-shadow:0 2px 6px #14eafd55;width:100%;transition:background 0.22s, box-shadow 0.17s;
+      display:block;text-align:center;max-width:292px;margin:0 auto 3rem auto;
     }
-    .plan-caption {
-      color: #dbefff;
-      font-size: 1.04rem;
-      text-align: center;
-      max-width: 340px;
-      line-height: 1.5;
-      background: rgba(24,28,53,0.84);
-      border-radius: 9px;
-      padding: 12px 20px;
+    .open-feedback:hover, .feedback-btn:hover{
+      background:linear-gradient(-89deg,#3ed3ff,var(--accent));
+      box-shadow:0 4px 16px #18d7ff57;
     }
-    .features {
-      margin: 2rem auto 2.5rem auto;
-      max-width: 410px;
-      background: var(--card-bg);
-      border-radius: 15px;
-      box-shadow: 0 2px 14px #1127;
-      padding: 18px 28px;
-      color: #c6effb;
-      animation: fadeInUp 0.85s .24s both;
+
+    /* Модальное окно обратной связи */
+    .fast-modal-backdrop{
+      position:fixed;inset:0;background:rgba(22,30,45,0.76);z-index:1000;display:none;
     }
-    .features ul {
-      margin: 0;
-      padding: 8px 0 0 24px;
-      font-size: 1.05rem;
-      color: #f2ffff;
+    .fast-modal{
+      display:flex;flex-direction:column;gap:1rem;background:var(--card-bg);border-radius:20px;box-shadow:0 6px 40px #0adff977;
+      padding:32px 28px 28px 28px;width:92vw;max-width:330px;margin:8vh auto;animation:fadeInUp .45s;position:relative;
     }
-    .features li {
-      margin-bottom: 4px;
+    .fast-modal-close{
+      position:absolute;top:15px;right:17px;cursor:pointer;font-size:1.35rem;color:var(--accent);background:none;border:none;padding:3px 8px;opacity:.85;transition:opacity .14s;
     }
-    .fast-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(22,30,45,0.74);
-      z-index: 1000;
-      display: none;
+    .fast-modal-close:hover{opacity:1;}
+    .feedback-form label{display:block;margin:9px 0 12px 0;color:#b5efff;font-size:1.01rem;}
+    .feedback-form input[type="text"],.feedback-form input[type="tel"]{
+      width:100%;padding:13px 10px;margin-top:5px;background:var(--input-bg);border:none;border-radius:10px;font-size:1.09rem;color:var(--text);outline:none;transition:box-shadow .17s;box-shadow:0 1px 7px #18cff833;font-family:inherit;
     }
-    .fast-modal {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      background: var(--card-bg);
-      border-radius: 20px;
-      box-shadow: 0 6px 40px #0adff977;
-      padding: 32px 28px 28px 28px;
-      width: 92vw; max-width: 330px;
-      margin: 8vh auto;
-      animation: fadeInUp 0.45s;
-      position: relative;
-    }
-    .fast-modal-close {
-      position: absolute;
-      top: 15px; right: 17px;
-      cursor: pointer;
-      font-size: 1.35rem;
-      color: var(--accent);
-      background: none;
-      border: none;
-      padding: 3px 8px;
-      opacity: .85;
-      transition: opacity .14s;
-    }
-    .fast-modal-close:hover { opacity: 1;}
-    .feedback-btn,.open-feedback {
-      font-family: "Montserrat",sans-serif;
-      font-weight: bold;
-      font-size: 1.11rem;
-      letter-spacing: 0.09em;
-      padding: 13px 0;
-      background: linear-gradient(89deg, var(--accent), #63ffaa);
-      color: #181828;
-      border-radius: 13px;
-      border: none;
-      margin-top: 7px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px #14eafd55;
-      width: 100%;
-      transition: background 0.22s, box-shadow 0.17s;
-    }
-    .feedback-btn:hover,.open-feedback:hover {
-      background: linear-gradient(-89deg, #3ed3ff, var(--accent));
-      box-shadow: 0 4px 16px #18d7ff57;
-    }
-    .open-feedback {
-      margin: 0 auto 3rem auto;
-      max-width: 292px;
-      display: block;
-      text-align: center;
-    }
-    .feedback-form label {
-      display: block;
-      margin: 9px 0 12px 0;
-      color: #b5efff;
-      font-size: 1.01rem;
-    }
-    .feedback-form input[type="text"],
-    .feedback-form input[type="tel"] {
-      width: 100%;
-      padding: 13px 10px;
-      margin-top: 5px;
-      background: var(--input-bg);
-      border: none;
-      border-radius: 10px;
-      font-size: 1.08rem;
-      color: var(--fg);
-      outline: none;
-      transition: box-shadow .17s;
-      box-shadow: 0 1px 7px #18cff833;
-      font-family: inherit;
-    }
-    .feedback-form input:focus {
-      box-shadow: 0 2px 16px #2cdeeaa4;
-    }
-    @media (max-width: 600px) {
-      .project-title { font-size:1.18rem;}
-      .project-desc { font-size:1rem;}
-      .features { padding: 15px 11px;}
-      .gallery-grid img, .plan-section img { height: 115px; }
-    }
-    [data-aos] { opacity:0; transform:translateY(30px);}
-    .aos-animate { opacity:1!important; transform:none!important; transition:opacity 0.6s, transform .65s;}
-    body,html { touch-action: manipulation; }
+    .feedback-form input:focus{box-shadow:0 2px 16px #2cdeeaa4;}
+    /* Анимация */
+    @keyframes fadeInUp{0%{opacity:0;transform:translateY(25px);}100%{opacity:1;transform:translateY(0);}}
+
     /* Сергей FAB */
-    .sergey-fab {
-      position: fixed;
-      right: 27px;
-      bottom: 30px;
-      z-index: 1020;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(140deg, var(--accent) 65%, #3ef9a8 100%);
-      color: #1a2233;
-      border-radius: 100px;
-      box-shadow: 0 2px 25px 0 #16d6f7b4, 0 2px 7px 1px #169aef2d;
-      padding: 0 20px 0 10px;
-      height: 56px;
-      min-width: 56px;
-      font-family: "Montserrat",sans-serif;
-      font-weight: 700;
-      font-size: 1.11rem;
-      border: none;
-      cursor: pointer;
-      outline: none;
-      transition: box-shadow .17s, background .26s;
-      gap: 10px;
-      animation: fadeInUp 0.64s 0.25s both;
+    .sergey-fab-rect{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:15px 20px;border-radius:25px;cursor:pointer;box-shadow:0 5px 20px rgba(93,223,249,.22);transition:transform .3s,box-shadow .3s;display:flex;align-items:center;gap:10px;font-weight:600;z-index:1000;font-size:1.08rem;font-family:'Montserrat',sans-serif;}
+    .sergey-fab-rect:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(93,223,249,.38);}
+    .sergey-fab-rect .label{padding-left:7px;}
+    .sergey-fab-rect svg{width:22px;height:22px;fill:currentColor;margin-right:0;}
+
+    @media (max-width:900px){
+      .gallery-grid{grid-template-columns:1fr 1fr;}
+      .gallery-grid img{height:220px;}
+      .plan-section img{height:195px;width:99vw;}
     }
-    .sergey-fab:hover, .sergey-fab:focus {
-      background: linear-gradient(110deg, #63ffaa 40%, var(--accent) 100%);
-      box-shadow: 0 6px 36px #08f4e766, 0 2px 7px 1px #169aef1d;
-      color: #1a2440;
-    }
-    .sergey-fab .icon {
-      font-size: 2.1rem;
-      margin-left: 2px;
-      margin-right: 0;
-      line-height: 1;
-      filter: drop-shadow(0 1px 4px #fff7);
-      user-select: none;
-    }
-    .sergey-fab .label {
-      font-size: 1.04rem;
-      font-weight: 700;
-      padding-left: 7px;
-      padding-right: 8px;
-      display: none;
-    }
-    .sergey-fab:hover .label, .sergey-fab:focus .label {
-      display: inline;
-      animation: fadeInUp .21s;
-    }
-    @media (max-width:600px) {
-      .sergey-fab {height:46px;min-width:46px;font-size:.95rem;padding:0 13px 0 5px;}
-      .sergey-fab .icon {font-size:1.3em;}
-    }
-    .sergey-fab-tooltip {
-      display: none;
-      position: absolute;
-      right: 0;
-      bottom: 68px;
-      background: #101522ee;
-      color: #fff;
-      border-radius: 8px;
-      padding: 7px 16px;
-      font-size: .92rem;
-      box-shadow: 0 3px 18px #16192e88;
-      white-space: nowrap;
-      z-index: 9999;
-      font-family: "Montserrat",sans-serif;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .15s;
-    }
-    .sergey-fab:hover + .sergey-fab-tooltip,
-    .sergey-fab:focus + .sergey-fab-tooltip {
-      display: block;
-      opacity: 1;
+    @media (max-width:600px){
+      .project-title{font-size:1.13rem;}
+      .project-desc{font-size:.95rem;}
+      .features{padding:13px 7px;}
+      .gallery-grid{grid-template-columns:1fr;}
+      .gallery-grid img{height:170px;}
+      .plan-section img{height:150px;}
+      .sergey-fab-rect{bottom:16px;right:12px;padding:10px 13px;font-size:.99rem;}
+      .sergey-fab-rect .label{display:none;}
     }
   </style>
 </head>
 <body>
   <!-- Меню -->
   <nav>
-    <a href="index.html" class="active">Меню</a>
+    <a href="index.html">Меню</a>
     <a href="technology.html">Технологии</a>
   </nav>
 
@@ -349,6 +163,7 @@
     Большой светлый дом для семьи: просторная гостиная, три спальни, высокие потолки, уютная терраса и современная планировка. Дом, в который хочется возвращаться каждый день!
   </div>
 
+  <!-- Галерея -->
   <section class="gallery-section">
     <div class="gallery-title">Фотогалерея</div>
     <div class="gallery-grid">
@@ -408,74 +223,28 @@
     </div>
   </div>
 
-  <!-- Кнопка ассистента прораб Сергей -->
-  <button class="sergey-fab" id="sergeyFab" aria-label="Чат с Сергеем Прорабом" type="button">
-    <span class="icon">👷</span>
+  <!-- Кнопка чат-бота -->
+  <button class="sergey-fab-rect" onclick="openSergeyChat()" aria-label="Чат с Сергеем-прорабом" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.486 3 2 6.94 2 11.5c0 2.272 1.127 4.313 2.962 5.865L4 22l4.278-2.138A11.86 11.86 0 0 0 12 21c5.514 0 10-3.94 10-8.5S17.514 3 12 3z"/></svg>
     <span class="label">Сергей Прораб</span>
   </button>
-  <span class="sergey-fab-tooltip" id="sergeyFabTooltip">Задайте вопрос прорабу прямо сейчас!</span>
 
-  <!-- JS: Модальное окно, плавная анимация и ассистент -->
   <script>
-    // Плавное появление блоков (pseudo-AOS)
-    function lazyAnimate() {
-      document.querySelectorAll('[data-aos]').forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight-100){
-          el.classList.add('aos-animate');
-        }
-      });
-    }
-    window.addEventListener('scroll', lazyAnimate);
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(lazyAnimate, 400);
-    });
-
     // Модальная форма обратной связи
     const openBtn=document.getElementById('openFeedbackBtn'),
           modal=document.getElementById('feedbackModal'),
           closeBtn=document.getElementById('closeFeedbackBtn');
-    openBtn.onclick = ()=>{modal.style.display="block";setTimeout(()=>{modal.querySelector('.fast-modal').classList.add('aos-animate');},10);}
-    closeBtn.onclick = ()=>{modal.style.display="none";modal.querySelector('.fast-modal').classList.remove('aos-animate');}
-    window.onclick = e=>{ if(e.target===modal){modal.style.display="none";modal.querySelector('.fast-modal').classList.remove('aos-animate');} };
+    openBtn.onclick = ()=>{modal.style.display="block";setTimeout(()=>{modal.querySelector('.fast-modal').style.opacity=1;},10);}
+    closeBtn.onclick = ()=>{modal.style.display="none";modal.querySelector('.fast-modal').style.opacity=0;}
+    window.onclick = e=>{ if(e.target===modal){modal.style.display="none";modal.querySelector('.fast-modal').style.opacity=0;} };
 
-    // Сергей прораб ассистент — обработка кнопки
-    function openSergeyChat() {
-      if (window.chatbase && typeof window.chatbase.openChat === 'function') {
-        window.chatbase.openChat();
-      } else {
-        alert("Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите секунду...");
-      }
+    // Чат-бот
+    function openSergeyChat(){
+      if(window.chatbase&&typeof window.chatbase.openChat==='function'){window.chatbase.openChat();}
+      else{alert('Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите немного...');}
     }
-    document.getElementById('sergeyFab').onclick = openSergeyChat;
-    // Показываем тултип только при ховере (на десктопе) — соответствует стилю
-
-    // Chatbase динамический скрипт подключения
-    (function(){
-      if(!window.chatbase || (typeof window.chatbase === "function" && window.chatbase("getState")!=="initialized")){
-        window.chatbase=(...arguments)=>{
-          if(!window.chatbase.q){window.chatbase.q=[]}
-          window.chatbase.q.push(arguments)
-        };
-        window.chatbase=new Proxy(window.chatbase,{
-          get(target,prop){
-            if(prop==="q"){return target.q}
-            return (...args)=>target(prop,...args)
-          }
-        });
-      }
-      const onLoad=function(){
-        const script=document.createElement("script");
-        script.src="https://www.chatbase.co/embed.min.js";
-        script.id="chatbase-script";
-        script.setAttribute('chatbotId','elEbjas8v3UayyJoEx6Fq');
-        document.body.appendChild(script)
-      };
-      if(document.readyState==="complete"){
-        onLoad();
-      }else{
-        window.addEventListener("load",onLoad)
-      }
-    })();
   </script>
+  <!-- Chatbase -->
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="elEbjas8v3UayyJoEx6Fq" defer></script>
 </body>
 </html>
