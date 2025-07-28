@@ -17,188 +17,109 @@
       --text:#fff;
       --text-alt:#bfd6ee;
       --success:#6EFFB7;
-      --card-bg:rgba(32,38,62, 0.93);
+      --card-bg:rgba(32,38,62,0.93);
       --input-bg:#222641;
-      --transition:0.35s cubic-bezier(.4,.9,.5,1.2);
+      --transition:0.32s cubic-bezier(.4,.9,.5,1.2);
     }
     html,body{
-      margin:0;padding:0;
-      min-height:100vh;
-      font-family:'Roboto',Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      scroll-behavior:smooth;
-      -webkit-font-smoothing:antialiased;
+      margin:0;padding:0;min-height:100vh;
+      font-family:'Roboto',Arial,sans-serif;background:var(--bg);
+      color:var(--text);scroll-behavior:smooth;-webkit-font-smoothing:antialiased;
     }
     *{box-sizing:border-box}
 
     nav{
-      display:flex;gap:1.5rem;
-      justify-content:flex-start;align-items:center;
+      display:flex;gap:1.5rem;justify-content:flex-start;align-items:center;
       padding:18px 4vw 10px 4vw;
-      background:rgba(30,34,54,0.97);
-      box-shadow:0 2px 8px 0 rgba(25,32,41,0.08);
+      background:rgba(30,34,54,0.97);box-shadow:0 2px 8px 0 rgba(25,32,41,0.08);
+      border-bottom:2px solid rgba(93,223,249,0.08);position:sticky;top:0;z-index:20;
       backdrop-filter:blur(6px);
-      border-bottom:2px solid rgba(93,223,249,0.08);
-      position:sticky;top:0;left:0;right:0;
-      z-index:20;
     }
     nav a{
-      font-family:"Montserrat",sans-serif;
-      font-size:1.02rem;font-weight:700;
-      text-decoration:none;
-      text-transform:uppercase;
-      color:var(--text);
-      background:none;border:none;
-      padding:9px 18px;
-      border-radius:22px;
-      transition:background var(--transition),color var(--transition);
-      letter-spacing:1.1px;
+      font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:700;text-decoration:none;text-transform:uppercase;
+      color:var(--text);padding:10px 20px;border-radius:22px;transition:background var(--transition),color var(--transition);letter-spacing:1.1px;
     }
-    nav a:hover,nav a.active{
-      background:var(--accent);
-      color:var(--bg);
-    }
+    nav a:hover,nav a.active{background:var(--accent);color:var(--bg);}
 
-    /* HERO БЛОК */
-    .hero-video-wrap{
-      position:relative;width:100vw;min-height:70vh;display:flex;align-items:center;justify-content:center;overflow:hidden;
-    }
+    /* HERO БЛОК - устранён постер! */
+    .hero-video-wrap{position:relative;width:100vw;min-height:70vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
     .hero-bg-video{
-      position:absolute;top:50%;left:50%;
-      transform:translate(-50%,-50%);
-      min-width:100vw;min-height:100vh;width:auto;height:auto;
-      object-fit:cover;
-      z-index:0;
-      background:#000;
-      pointer-events:none;
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      min-width:100vw;min-height:100vh;width:auto;height:auto;max-width:none;max-height:none;object-fit:cover;
+      z-index:0;background:#111;pointer-events:none; /* чёрный только на мгновение */
     }
     .hero-content{
-      position:relative;
-      z-index:2;
-      text-align:center;
-      color:#fff;
-      margin:0 auto;
-      padding:65px 15px 60px 15px;
-      border-radius:16px;
-      background:none;
-      /* УБРАНО ВСЕ ЗАТЕНЕНИЕ и фон! */
-      backdrop-filter:none;
+      position:relative;z-index:2;text-align:center;color:#fff;margin:0 auto;
+      padding:62px 16px 56px 16px;border-radius:16px;background:none;backdrop-filter:none;
     }
     .hero-content h1{
-      font-family:'Montserrat',sans-serif;
-      font-size:2.7rem;
-      font-weight:700;
-      margin-bottom:20px;
-      color:#fff;
-      text-shadow:2px 2px 10px rgba(5,10,25,0.19); /* лёгкая тень только для читабельности */
-      background:none;
+      font-family:'Montserrat',sans-serif;font-size:2.7rem;font-weight:700;margin-bottom:20px;color:#fff;
+      text-shadow:2px 2px 10px rgba(5,10,25,0.19);background:none;
     }
-    .hero-content span{
-      color:var(--accent);
-    }
+    .hero-content span{color:var(--accent);}
     .hero-content p{
-      font-size:1.23rem;
-      max-width:440px;
-      margin:0 auto;
-      opacity:.95;
-      background:none;
+      font-size:1.23rem;max-width:440px;margin:0 auto;opacity:.95;background:none;
       text-shadow:1px 1px 8px rgba(16,30,40,0.12);
     }
 
-    /* проекты */
+    /* проекты BLOCK: фото в 2 раза крупнее! */
     .projects-section{padding:80px 20px 35px 20px;max-width:1200px;margin:0 auto;}
     .projects-section h2{
-      text-align:center;
-      font-size:2.0rem;
-      margin-bottom:40px;
-      color:var(--accent);
-      font-family:'Montserrat',sans-serif;
-      font-weight:700;
-      letter-spacing:.04em;
+      text-align:center;font-size:2.1rem;margin-bottom:40px;color:var(--accent);
+      font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.04em;
     }
-    .projects-cards{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+    .projects-cards{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
     .card{
-      background:var(--card-bg);
-      border-radius:15px;overflow:hidden;
-      transition:.3s box-shadow,.3s transform;
-      border:1px solid rgba(255,255,255,.09);
-      box-shadow:0 4px 22px #061A3c13;
-      display:flex;flex-direction:column;
-      opacity:1;
+      background:var(--card-bg);border-radius:15px;overflow:hidden;transition:.33s box-shadow,.32s transform;
+      border:1px solid rgba(255,255,255,.10);box-shadow:0 4px 28px #061A3c13;display:flex;flex-direction:column;opacity:1;
       will-change:transform;
     }
-    .card:hover{transform:translateY(-7px) scale(1.03);box-shadow:0 7px 30px #0bd4fb44;}
-    .card img{width:100%;height:195px;object-fit:cover;}
+    .card:hover{transform:translateY(-9px) scale(1.04);box-shadow:0 11px 36px #0bd4fb44;}
+    .card img{
+      width:100%;height:360px;object-fit:cover;object-position:center center;
+      transition:transform .32s cubic-bezier(.5,1.3,.5,1) box-shadow .22s;
+      border-radius:0;display:block;
+    }
     .card-content{padding:24px 18px;color:var(--text);}
     .card-content h3{
-      font-size:1.35rem;margin-bottom:13px;
-      color:var(--accent);
-      font-family:'Montserrat',sans-serif;font-weight:700;
-      letter-spacing:.02em;
+      font-size:1.47rem;margin-bottom:13px;color:var(--accent);font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.02em;
     }
-    .card-content p{margin-bottom:16px;line-height:1.6;opacity:.91;}
+    .card-content p{margin-bottom:16px;line-height:1.6;opacity:.93;}
     .card-content a{
-      display:inline-block;
-      background:linear-gradient(89deg,var(--accent),#63ffaa);
-      color:#181828;
-      padding:10px 22px;
-      text-decoration:none;
-      border-radius:22px;
-      font-family:'Montserrat',sans-serif;
-      font-weight:700;font-size:1.03rem;
-      letter-spacing:.03em;border:none;box-shadow:0 1px 6px #12cff822;
-      transition:background .27s, box-shadow .18s;
+      display:inline-block;background:linear-gradient(89deg,var(--accent),#63ffaa);color:#181828;
+      padding:12px 26px;text-decoration:none;border-radius:22px;
+      font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.10rem;letter-spacing:.03em;border:none;box-shadow:0 1px 8px #12cff822;
+      transition:background .24s, box-shadow .18s;
     }
     .card-content a:hover{
       background:linear-gradient(-89deg,#3ed3ff,var(--accent));
-      box-shadow:0 3px 16px #17d1ff44;
+      box-shadow:0 5px 26px #17d1ff44;
     }
 
     /* калькулятор */
     .calc-section{max-width:650px;margin:55px auto 15px auto;padding:0 20px;}
     .calc-section h2{
-      text-align:center;
-      font-size:1.35rem;
-      margin-bottom:12px;
-      color:var(--accent);
-      font-family:'Montserrat',sans-serif;font-weight:700;
-      letter-spacing:.02em;
+      text-align:center;font-size:1.35rem;margin-bottom:12px;color:var(--accent);
+      font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.02em;
     }
-    .calc-description{
-      text-align:center;
-      font-size:.95rem;
-      max-width:430px;
-      margin:0 auto 20px auto;
-      color:var(--text-alt);
-      opacity:.92;
-    }
+    .calc-description{text-align:center;font-size:.95rem;max-width:430px;margin:0 auto 20px;color:var(--text-alt);opacity:.92;}
     .calc-form{background:var(--card-bg);border-radius:19px;padding:29px;box-shadow:0 4px 22px #08131315;border:1px solid rgba(255,255,255,.09);}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:19px;margin-bottom:15px;}
     .form-group{display:flex;flex-direction:column;}
     .form-group.full-width{grid-column:1/-1}
     .calc-form label{color:var(--text);font-weight:500;margin-bottom:8px;font-size:.95rem}
     .calc-form input,.calc-form select{
-      padding:12px 13px;
-      border:2px solid rgba(255,255,255,.10);
-      border-radius:10px;
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      font-size:1rem;
-      transition:border-color .23s,background .22s;
-      font-family:inherit;
+      padding:12px 13px;border:2px solid rgba(255,255,255,.10);border-radius:10px;
+      background:rgba(255,255,255,.04);color:var(--text);font-size:1rem;
+      transition:border-color .23s,background .22s;font-family:inherit;
     }
-    .calc-form input:focus,.calc-form select:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,.10);}
+    .calc-form input:focus,.calc-form select:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,.12);}
     .calc-form option{background:var(--bg-alt);color:var(--text);}
     .calc-btn{
-      width:100%;
-      background:linear-gradient(89deg,var(--accent),#63ffaa);
-      color:#181828;
+      width:100%;background:linear-gradient(89deg,var(--accent),#63ffaa);color:#181828;
       border:none;padding:13px;
-      border-radius:12px;
-      font-size:1.07rem;font-weight:700;cursor:pointer;
-      transition:background .19s, box-shadow .11s;
-      margin-top:8px;
+      border-radius:12px;font-size:1.07rem;font-weight:700;cursor:pointer;
+      transition:background .19s, box-shadow .11s;margin-top:8px;
       font-family:'Montserrat',sans-serif;
     }
     .calc-btn:hover{background:linear-gradient(-89deg,#3ed3ff,var(--accent));box-shadow:0 2px 8px #26f4ff44;}
@@ -208,54 +129,44 @@
     .price-breakdown div{display:flex;justify-content:space-between;margin-bottom:6px;}
     .economy-bonus{color:var(--success);font-weight:600;font-size:1.05rem;margin-top:12px;}
 
-    /* форма обратной связи */
     .feedback-section{max-width:500px;margin:60px auto 40px auto;padding:0 20px;}
     .feedback-section h2{text-align:center;font-size:1.3rem;margin-bottom:28px;color:var(--text);font-family:'Montserrat',sans-serif;}
     .feedback-form{background:var(--card-bg);padding:25px 15px;border-radius:13px;box-shadow:0 3px 16px #121a3c1a;border:1px solid rgba(255,255,255,.09);}
     .feedback-form label{color:var(--text);font-weight:500;margin-bottom:7px;display:block;}
     .feedback-form input{
-      width:100%;padding:10px 13px;margin-bottom:13px;
-      border:2px solid rgba(255,255,255,.10);
-      border-radius:9px;background:rgba(255,255,255,.06);
-      color:var(--text);font-size:1rem;
-      font-family:inherit;
-      transition:border-color .17s;
+      width:100%;padding:10px 13px;margin-bottom:13px; border:2px solid rgba(255,255,255,.10);
+      border-radius:9px;background:rgba(255,255,255,.06);color:var(--text);font-size:1rem;
+      font-family:inherit;transition:border-color .17s;
     }
     .feedback-form input:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,.10);}
     .feedback-btn{
       width:100%;background:linear-gradient(89deg,var(--accent),#63ffaa);color:#181828;
       border:none;padding:12px;border-radius:10px;font-size:1.05rem;font-weight:700;cursor:pointer;
-      transition:background .21s,box-shadow .14s;
-      font-family:'Montserrat',sans-serif;
+      transition:background .18s,box-shadow .14s;font-family:'Montserrat',sans-serif;
     }
     .feedback-btn:hover{background:linear-gradient(-89deg,#3ed3ff,var(--accent));box-shadow:0 2px 8px #14eafd55;}
     .success-message,.error-message{padding:13px;border-radius:10px;margin-top:15px;text-align:center;font-weight:500}
     .success-message{background:rgba(110,255,183,.12);color:var(--success);border:1px solid var(--success);}
     .error-message{background:rgba(255,111,97,.13);color:var(--accent);border:1px solid var(--accent);}
 
-    /* Sergey (чат) FAB */
-    .sergey-fab-rect{
-      position:fixed;bottom:30px;right:30px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
-      color:#fff;border:none;padding:15px 20px;border-radius:25px;
-      cursor:pointer;box-shadow:0 5px 20px rgba(93,223,249,.22);
-      transition:transform .3s,box-shadow .3s;
-      display:flex;align-items:center;gap:10px;
-      font-weight:600;z-index:1000;font-size:1.08rem;
-      font-family:'Montserrat',sans-serif;
-    }
+    /* Сергей FAB */
+    .sergey-fab-rect{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:15px 20px;border-radius:25px;cursor:pointer;box-shadow:0 5px 20px rgba(93,223,249,.22);transition:transform .3s,box-shadow .3s;display:flex;align-items:center;gap:10px;font-weight:600;z-index:1000;font-size:1.08rem;font-family:'Montserrat',sans-serif;}
     .sergey-fab-rect:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(93,223,249,.38);}
     .sergey-fab-rect .label{padding-left:7px;}
     .sergey-fab-rect svg{width:22px;height:22px;fill:currentColor;margin-right:0;}
 
+    @media (max-width:900px){
+      .card img{height:220px;}
+      .projects-cards{grid-template-columns:1fr;}
+    }
     @media (max-width:600px){
-      .hero-content h1{font-size:1.35rem;}
+      .hero-content h1{font-size:1.2rem;}
       .hero-content p{font-size:.93rem;}
-      .projects-section{padding:35px 6px;}
-      .projects-section h2{font-size:1.06rem;}
+      .projects-section{padding:20px 5px;}
+      .projects-section h2{font-size:1.01rem;}
       .calc-section{padding:0 7px;}
       .feedback-section{padding:0 7px;}
-      .card img{height:110px;}
+      .card img{height:180px;}
       .sergey-fab-rect{bottom:16px;right:12px;padding:10px 13px;font-size:.99rem;}
       .sergey-fab-rect .label{display:none;}
     }
@@ -268,9 +179,9 @@
     <a href="technology.html">Технологии</a>
   </nav>
 
-  <!-- HERO c видеофоном (максимальный видео-фон!) -->
+  <!-- HERO: видеофон без poster -->
   <section class="hero-video-wrap">
-    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="https://i.postimg.cc/j5ZcMpJH/hero-poster.webp">
+    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" id="herovid">
       <source src="https://www.dropbox.com/scl/fi/llhhw58f34rj8uocsgatp/.mp4?rlkey=d6q3cehq9qa74c6iiuykggzmz&st=173gam4a&raw=1" type="video/mp4">
       Ваш браузер не поддерживает видео.
     </video>
@@ -315,7 +226,6 @@
   <section class="calc-section">
     <h2>Индивидуальный расчёт для вашего будущего дома</h2>
     <div class="calc-description">Выберите параметры и получите детальный расчёт стоимости с учётом всех особенностей!</div>
-
     <div class="calc-form">
       <div class="form-row">
         <div class="form-group">
@@ -388,13 +298,11 @@
       const complex    = document.getElementById('complex').value;
       const cross      = document.getElementById('cross').value === 'yes';
       const resultDiv  = document.getElementById('calc-result');
-
       if(area < 20){
         resultDiv.innerHTML = '<span style="color:var(--accent);">Пожалуйста, введите площадь дома от 20 м²!</span>';
         resultDiv.style.display = 'block';
         return;
       }
-
       const basePrice = 27000;
       const comp = {
         base       : area * floors * basePrice,
@@ -404,7 +312,6 @@
       };
       let subtotal = comp.base + comp.complex + comp.foundation;
       if(cross){comp.cross = subtotal * .11; subtotal += comp.cross;}
-
       let breakdown =
         `<div class="price-breakdown">
            <div><span>Базовая стоимость (${area} м² × ${floors} эт.):</span><span>${comp.base.toLocaleString()} ₽</span></div>`;
@@ -412,9 +319,7 @@
       if(comp.foundation) breakdown += `<div><span>Плитный фундамент:</span><span>+${comp.foundation.toLocaleString()} ₽</span></div>`;
       if(comp.cross)      breakdown += `<div><span>Перекрёстное утепление:</span><span>+${comp.cross.toLocaleString()} ₽</span></div>`;
       breakdown += `</div>`;
-
       const economy = cross ? `<div class="economy-bonus">Экономия на отоплении до 25 % в год!</div>` : '';
-
       resultDiv.innerHTML =
         `<div><strong>Итоговая стоимость:</strong></div>
          <div class="price-display">${Math.round(subtotal).toLocaleString()} ₽</div>
@@ -449,13 +354,12 @@
       if(type==='success') setTimeout(()=>box.innerHTML='',5000);
     }
 
-    /* чат-бот */
+    // Чат-бот
     function openSergeyChat(){
       if(window.chatbase&&typeof window.chatbase.openChat==='function'){window.chatbase.openChat();}
       else{alert('Здравствуйте! Я прораб Сергей. Чат-бот загружается, подождите немного...');}
     }
   </script>
-
   <!-- Chatbase -->
   <script src="https://www.chatbase.co/embed.min.js" chatbotId="elEbjas8v3UayyJoEx6Fq" defer></script>
 </body>
